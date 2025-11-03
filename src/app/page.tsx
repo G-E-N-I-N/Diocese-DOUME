@@ -159,8 +159,8 @@ export default function Home() {
           </h2>
           <p className="text-lg md:text-xl max-w-4xl mx-auto mb-2 leading-relaxed animate-fade-in opacity-90">
             Un Diocèse vivant et rayonnant de la vie de foi des fidèles et de leurs pasteurs ; 
-            un Diocèse disposant des ouvriers apostoliques et des laïcs engager, ainsi que des 
-            infrastructures opérationnelle en nombre suffisant ; un Diocèse en marche et bien organisé…
+            un Diocèse disposant des ouvriers apostoliques et des laïcs engagés, ainsi que des 
+            infrastructures opérationnelles en nombre suffisant ; un Diocèse en marche et bien organisé…
           </p>
           <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-5 py-3 md:py-4 rounded-full font-bold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2">
             Découvrir nos axes pastoraux
@@ -205,10 +205,10 @@ export default function Home() {
                     className="object-contain"
                   />
                 </div>
-                <div className="text-center">
+                {/* <div className="text-center">
                   <p className="text-sm text-muted-foreground">La Sainte Croix - Missio</p>
                   <p className="text-xs text-muted-foreground">Pontifica Opera Missionarie</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
