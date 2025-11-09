@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
     useEffect(() => {
@@ -29,11 +30,14 @@ export default function Footer() {
             <div className="container mx-auto px-2 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Logo Section */}
-                    <div className="text-center md:text-left">
-                        <h3 className="text-2xl font-bold mb-2 text-primary-foreground">
-                            DIOCÈSE DE DOUMÉ
-                        </h3>
-                        <p className="text-sm text-muted-foreground">Abong Mbang</p>
+                    <div className="text-center md:text-left min-h-25 w-auto mx-auto relative overflow-hidden flex items-center">
+                        <Image 
+                            src="/Logo Noir et Blanc.png"
+                            alt="Logo du Diocèse de Doumé Abong Mbang"
+                            fill
+                            className="object-cover"
+                        />
+                        <p className="text-sm text-muted-foreground z-10">DIOCÈSE DE DOUMÉ, Abong Mbang</p>
                     </div>
 
                     {/* Contact Section */}

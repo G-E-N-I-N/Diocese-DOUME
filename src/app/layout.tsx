@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { ThemeProviders } from "./providers/ThemeProviders";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+const oldEnglish = localFont({
+    src: "./fonts/OldEnglishFive.ttf",
+    variable: "--font-oldEnglish",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +34,12 @@ export const metadata: Metadata = {
   
   authors: [{ name: "l0rd_9h057" }],
   
-  metadataBase: new URL('https://votre-domaine.com'),
+  metadataBase: new URL('https://diocese-doume.vercel.app/'),
   
   openGraph: {
     title: 'Diocèse de Doumé Abong Mbang - Site Officiel',
     description: 'Découvrez la vie de foi, les zones pastorales et les activités de la communauté dans l’Est du Cameroun.',
-    url: '/', // L'URL canonique de la page (la racine ici)
+    url: '/',
     siteName: 'Diocèse de Doumé Abong Mbang',
     images: [
         {
@@ -62,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr" className={oldEnglish.variable}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

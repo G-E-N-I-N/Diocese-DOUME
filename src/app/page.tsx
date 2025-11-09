@@ -4,28 +4,21 @@ import Image from 'next/image';
 import { ArrowRightCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-// Images (tu peux les adapter)
-const crossImage = '/cross.jpg';
-const logoImage = '/logo.png';
-
 export default function Home() {
   const { ref: cathedralRef, isVisible: cathedralVisible } = useScrollAnimation();
   const { ref: announcementRef, isVisible: announcementVisible } = useScrollAnimation();
   const { ref: pastoralRef, isVisible: pastoralVisible } = useScrollAnimation();
   const { ref: crossRef, isVisible: crossVisible } = useScrollAnimation();
+  const { ref: carteRef, isVisible: carteVisible } = useScrollAnimation();
 
   // Thème
   const heroGradient = 'bg-gradient-to-b from-primary/50 to-primary/30';
   const accentColor = 'bg-destructive text-destructive-foreground';
   const backgroundColor = 'bg-footer/10';
   const foregroundColor = 'text-foreground';
-  const cardBg = 'bg-card';
-  const cardText = 'text-card-foreground';
-  const mutedBg = 'bg-muted';
-  const mutedText = 'text-muted-foreground';
 
   return (
-    <main className="container flex-1">
+    <main className="flex-1">
       {/* === Section 1 : Cathédrale === */}
       <section
         ref={cathedralRef}
@@ -33,25 +26,22 @@ export default function Home() {
           cathedralVisible ? 'animate-fade-in-up' : 'opacity-0'
         }`}
       >
-        {/* Arc de séparation */}
-        {/* <svg
-          className="absolute bottom-0 left-0 w-full h-24 md:h-32 text-background"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          fill="currentColor"
-        >
-          <path d="M0,0 A600,600 0 0,0 1200,0 L1200,120 L0,120 Z" />
-        </svg> */}
+        <Image
+          src="/cathedrale sacré coeur.png"
+          alt="Cathédrale"
+          fill
+          className="object-cover"
+        />
 
         <div className="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Cathédrale<br />Saint Paul & Pierre.
+            <h2 className="text-4xl md:text-5xl font-oldEnglish text-primary-foreground lg:text-6xl font-bold mb-6 leading-tight">
+              Cathédrale<br />Sacré Coeur.
             </h2>
             <div className={`${accentColor} px-4 py-2 inline-block rounded font-bold mb-6 text-sm`}>
               PRÉSENTATION
             </div>
-            <p className="text-base md:text-lg leading-relaxed opacity-95">
+            <p className="text-base md:text-lg leading-relaxed opacity-95 backdrop-blur-2xl p-5 rounded-4xl">
               Le diocèse de Doumé-Abong Mbang est un diocèse catholique situé dans la région de l'Est du Cameroun. 
               Il couvre le département de Haut-Nyong, avec une superficie de 16 379 km². 
               Son territoire comprend deux principaux sièges : Doumé (cathédrale Saint-Pierre et Paul) 
@@ -59,28 +49,43 @@ export default function Home() {
             </p>
           </div>
 
-          <div className={`${mutedBg} relative w-full overflow-hidden h-80 md:h-96 flex items-center justify-center shadow-lg`}>
+          {/* <div className={`${mutedBg} relative w-full overflow-hidden h-80 md:h-96 flex items-center justify-center shadow-lg`}>
             <Image
               src="/cathedral.jpg"
               alt="Cathédrale"
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
         </div>
       </section>
 
-      {/* === Section 2 : Annonces === */}
+      {/* === Section 2 : Carte === */}
+      <section
+        ref={carteRef}
+        className={`relative w-auto h-[80vh] overflow-hidden transition-all duration-1000 ${
+          carteVisible ? 'animate-fade-in-up' : 'opacity-0'
+        }`}
+      >
+        <Image
+          src="/carte.png"
+          alt="Cathédrale"
+          fill
+          className="object-contain"
+        />
+      </section>
+
+      {/* === Section 3 : Annonces === */}
       <section
         ref={announcementRef}
-        className={`${backgroundColor} py-16 md:py-24 transition-all duration-1000 ${
+        className={`${backgroundColor} container py-16 md:py-24 transition-all duration-1000 ${
           announcementVisible ? 'animate-fade-in-up' : 'opacity-0'
         }`}
       >
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="relative rounded-xl overflow-hidden shadow-lg h-full">
             <Image
-              src="/youth1.jpg"
+              src="/la jeunesse.png"
               alt="Annonce fond"
               fill
               className="object-cover brightness-75"
@@ -146,10 +151,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === Section 3 : Axes Pastoraux === */}
+      {/* === Section 4 : Axes Pastoraux === */}
       <section
         ref={pastoralRef}
-        className={`relative bg-primary md:pb-4 overflow-hidden transition-all duration-1000 ${
+        className={`relative container bg-primary md:pb-4 overflow-hidden transition-all duration-1000 ${
           pastoralVisible ? 'animate-fade-in-up' : 'opacity-0'
         }`}
       >
@@ -170,10 +175,10 @@ export default function Home() {
         <div className="absolute -bottom-70 left-0 w-full h-80 bg-background transform -skew-y-12 origin-bottom-left"></div>
       </section>
 
-      {/* === ✅ Section 4 : Sainte Croix (remplacée) === */}
+      {/* === Section 5 : Sainte Croix (remplacée) === */}
       <section
         ref={crossRef}
-        className={`relative pb-20 bg-background transition-all duration-1000 ${
+        className={`relative container pb-20 bg-background transition-all duration-1000 ${
           crossVisible ? 'animate-fade-in-up' : 'opacity-0'
         }`}
       >
@@ -186,7 +191,7 @@ export default function Home() {
             <div className="relative animate-fade-in">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src={crossImage}
+                  src="/grande croix.png"
                   alt="La Sainte Croix"
                   width={800}
                   height={600}
@@ -198,17 +203,31 @@ export default function Home() {
               <div className="mt-8 flex justify-center items-center space-x-8">
                 <div className="bg-white p-4 rounded-full shadow-lg">
                   <Image
-                    src={logoImage}
+                    src="/logo caritas.png"
                     alt="Logo Diocèse"
                     width={80}
                     height={80}
                     className="object-contain"
                   />
                 </div>
-                {/* <div className="text-center">
-                  <p className="text-sm text-muted-foreground">La Sainte Croix - Missio</p>
-                  <p className="text-xs text-muted-foreground">Pontifica Opera Missionarie</p>
-                </div> */}
+                <div className="bg-white p-4 rounded-full shadow-lg">
+                  <Image
+                    src="/redemptoris.jpg"
+                    alt="Logo Diocèse"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
+                </div>
+                <div className="bg-white p-4 rounded-full shadow-lg">
+                  <Image
+                    src="/miva polska.jpg"
+                    alt="Logo Diocèse"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </div>
 

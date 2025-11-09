@@ -86,6 +86,8 @@
   --primary-red: #c85a54;
   --primary-yellow: #ffd700;
   --primary-beige: #e8d5c4;
+
+  --font-oldEnglish: "OldEnglish";
 }
 
 .dark {
@@ -125,6 +127,10 @@
   --footer-foreground: oklch(0.92 0.005 65);
 }
 
+.font-oldEnglish {
+  font-family: var(--font-oldEnglish), serif;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -151,19 +157,6 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
@@ -305,4 +298,15 @@ html {
 
 .gradient-blue-bottom {
   background: linear-gradient(180deg, rgba(94, 179, 214, 0.3) 0%, rgba(94, 179, 214, 0.8) 100%);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

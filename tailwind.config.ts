@@ -7,6 +7,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                oldEnglish: ["OldEnglish", "serif"],
+            },
             screens: {
                 'sm': '640px',
                 'md': '768px',

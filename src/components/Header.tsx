@@ -59,8 +59,8 @@ export default function Header() {
                                     className={`
                                         px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 transform
                                         ${isActive
-                                        ? 'bg-primary text-primary-foreground shadow-lg scale-105'
-                                        : 'text-foreground hover:text-primary-foreground hover:bg-primary/50 hover:scale-105'}
+                                        ? 'bg-footer text-primary-foreground shadow-lg scale-105'
+                                        : 'text-foreground hover:text-primary-foreground hover:bg-footer/50 hover:scale-105'}
                                     `}
                                 >
                                     {item.label}
@@ -109,8 +109,8 @@ export default function Header() {
                                 className={`
                                 py-2 rounded-lg font-semibold text-sm transition-all duration-300 transform
                                 ${isActive
-                                    ? 'bg-primary text-primary-foreground shadow-md scale-105 text-center'
-                                    : 'text-foreground hover:text-primary-foreground hover:bg-primary/50 hover:scale-105 hover:text-center'}
+                                    ? 'bg-footer text-primary-foreground shadow-md scale-105 text-center'
+                                    : 'text-foreground hover:text-primary-foreground hover:bg-footer/50 hover:scale-105 hover:text-center'}
                                 `}
                             >
                         {item.label}
