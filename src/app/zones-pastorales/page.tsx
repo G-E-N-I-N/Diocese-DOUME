@@ -5,6 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import ZonesPastoralesSlider from "./ZonesPastoralesSlider";
 import ParoisseDialog from "./ParoisseDialog";
+import { getZoneAndParoisse } from "@/hooks/zoneAndParoisseUrlHandler";
 
 export default function ZonePastoralePage() {
     React.useEffect(() => {
@@ -18,6 +19,20 @@ export default function ZonePastoralePage() {
     const [isVisible, setIsVisible] = React.useState(false);
     const [zone, setZone] = React.useState("");
     const [paroisse, setParoisse] = React.useState("");
+
+    React.useEffect(() => {
+        const fetchZoneAndParoisse = async () => {
+            const result = await getZoneAndParoisse();
+            if(result.success) {
+                setZone(result.zone);
+                // setParoisse(result.paroisse);
+                setIsVisible(result.success);
+            }
+        };
+
+        fetchZoneAndParoisse();
+    }, []);
+
 
     const primary = "var(--primary)";
     const cardBg = "var(--card)";
@@ -92,10 +107,10 @@ export default function ZonePastoralePage() {
         {/* Section C : Programme pastoral */}
         <section className="py-16 px-6 md:px-16" data-aos="fade-up">
             <h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12"
-            style={{ color: primary }}
+                className="text-3xl md:text-4xl font-bold text-center mb-12"
+                style={{ color: primary }}
             >
-            Programme Pastoral
+                Programme Pastoral
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -107,7 +122,7 @@ export default function ZonePastoralePage() {
                 data-aos="zoom-in"
                 data-aos-delay={i * 100}
                 >
-                <h3 className="text-lg font-semibold text-primary-foreground">
+                <h3 className="text-lg font-semibold text-primary-foreground/105">
                     {p.title}
                 </h3>
                 <p className="text-foreground/80 mt-2">
