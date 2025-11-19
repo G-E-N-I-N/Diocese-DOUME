@@ -104,34 +104,34 @@ export default function ZonePastoralePage() {
                 onClose={() => setIsVisible(false)}
             />
 
-        {/* Section C : Programme pastoral */}
-        <section className="py-16 px-6 md:px-16" data-aos="fade-up">
-            <h2
-                className="text-3xl md:text-4xl font-bold text-center mb-12"
-                style={{ color: primary }}
-            >
-                Programme Pastoral
-            </h2>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programme.map((p, i) => (
-                <div
-                key={i}
-                className="rounded-2xl p-6 shadow-lg backdrop-blur-md border border-primary/50 transition hover:shadow-xl"
-                style={{ backgroundColor: cardBg, color: cardFg }}
-                data-aos="zoom-in"
-                data-aos-delay={i * 100}
+            {/* Section C : Programme pastoral */}
+            {/* <section className="py-16 px-6 md:px-16" data-aos="fade-up">
+                <h2
+                    className="text-3xl md:text-4xl font-bold text-center mb-12"
+                    style={{ color: primary }}
                 >
-                <h3 className="text-lg font-semibold text-primary-foreground/105">
-                    {p.title}
-                </h3>
-                <p className="text-foreground/80 mt-2">
-                    Détails du programme {p.title.toLowerCase()}.
-                </p>
+                    Programme Pastoral
+                </h2>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {programme.map((p, i) => (
+                    <div
+                    key={i}
+                    className="rounded-2xl p-6 shadow-lg backdrop-blur-md border border-primary/50 transition hover:shadow-xl"
+                    style={{ backgroundColor: cardBg, color: cardFg }}
+                    data-aos="zoom-in"
+                    data-aos-delay={i * 100}
+                    >
+                    <h3 className="text-lg font-semibold text-primary-foreground/105">
+                        {p.title}
+                    </h3>
+                    <p className="text-foreground/80 mt-2">
+                        Détails du programme {p.title.toLowerCase()}.
+                    </p>
+                    </div>
+                ))}
                 </div>
-            ))}
-            </div>
-        </section>
+            </section> */}
         </main>
     );
 }

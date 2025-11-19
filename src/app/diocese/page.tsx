@@ -1,0 +1,145 @@
+'use client';
+
+import React from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import Hero from "./Hero";
+import StaffCard from "./StaffCard";
+import Image from "next/image";
+
+export default function Home() {
+  const historyText = `La diocèse de Doumé Abong-Mbang faisait d'abord partie de la Préfecture Apostolique du Cameroun qui fut détachée du Vicariat Apostolique du Nyas au XIXe siècle. Le Vicariat devint diocèse en 1919. La création du Vicariat Apostolique du Yoko en 1961... (texte exemple).`;
+  
+  React.useEffect(() => {
+    AOS.init({
+      duration: 1200,
+      easing: "ease-out-cubic",
+      once: false,
+    });
+  }, []);
+
+  const { ref: presentationRef, isVisible: presentationVisible } = useScrollAnimation();
+
+  return (
+    <main className="container min-h-screen relative bg-background">
+        {/* === Section 1 : Presentation === */}
+        <section
+          ref={presentationRef}
+          className={`relative min-h-screen bg-footer/10 container py-2 md:py-2 transition-all duration-1000 rounded-br-4xl mb-25 ${
+            presentationVisible ? 'animate-fade-in-up' : 'opacity-0'
+          }`}
+          data-aos="fade-up"
+        >
+          <header className="text-center mb-6" data-aos="fade-down" data-aos-delay="100">
+            <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6">Diocèse</h1>
+          </header>
+
+          <Hero
+            image="/cathedrale sacré coeur.png"
+            history={historyText}
+          />
+        </section>
+
+        {/* Curie Diocésaine */}
+        <section className="mt-5 mx-auto px-4 md:px-0" data-aos="fade-up" data-aos-delay="200">
+          <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="250">Curie Diocésaine</h1>
+
+          <div className="bg-primary w-full space-y-3 px-4 md:px-30 py-4 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+            <StaffCard
+              role="Chancelier"
+              name="P. Josue SANKOUONDJOU"
+              subtitle="Ordonné Prêtre le : 17 Mars 2018"
+              email="sandjo50@yahoo.fr"
+              img="https://randomuser.me/api/portraits/men/32.jpg"
+            />
+            <StaffCard
+              role="Econome"
+              name="P. Christel Mvogo Nomo"
+              subtitle="Ordonné Prêtre le : 05 Décembre 2020"
+              phone="+237 698 12 52 58"
+              img="https://randomuser.me/api/portraits/men/45.jpg"
+            />
+            <StaffCard
+              role="Secrétaire"
+              name="S. Fabiana LEITGEBER"
+              subtitle="Consacrée le : ........"
+              email="sr.fabiana@doume.info"
+            />
+          </div>
+        </section>
+
+        {/* Commission & Conseil */}
+        <section className="mt-5 max-w-3xl mx-auto px-4 md:px-0" data-aos="fade-up" data-aos-delay="400">
+          <h3 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="450">Commission et Conseil</h3>
+          <div className="h-36 bg-primary border rounded shadow-sm" data-aos="zoom-in" data-aos-delay="500"></div>
+        </section>
+
+        {/* Structures Diocésaines */}
+        <section className="mt-5 mx-auto overflow-hidden px-4 md:px-0" data-aos="fade-up" data-aos-delay="550">
+          <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="600">Structures Diocésaines</h1>
+
+          <div className="space-y-4 container px-0" data-aos="fade-up" data-aos-delay="650">
+            <div className="bg-destructive/80 text-primary-foreground p-2 rounded-md flex flex-col md:flex-row items-center justify-between gap-4" data-aos="slide-right" data-aos-delay="700">
+              <div className="text-4xl md:text-6xl text-center w-full md:w-1/4 font-bold">SEDUC</div>
+
+              <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
+                <div className="text-sm w-full md:w-3/4 text-gray-900 text-center md:text-left">Soeur -------- <br /> CONGREGATION</div>
+                <img src="/unknown.png" alt="SEDUC" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
+              <button disabled className="px-6 md:px-10 py-2 bg-red-700 text-primary-foreground rounded text-sm md:text-base">Écoles maternelles</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-blue-700 text-primary-foreground rounded text-sm md:text-base">Écoles primaires</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-green-700 text-primary-foreground rounded text-sm md:text-base">Collèges</button>
+            </div>
+
+            <div className="bg-destructive/80 text-primary-foreground p-2 rounded-md flex flex-col md:flex-row items-center justify-between gap-4" data-aos="slide-left" data-aos-delay="750">
+              <div className="text-2xl md:text-4xl text-center w-full md:w-1/4 font-bold">Coordination de la santé</div>
+
+              <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
+                <div className="w-full md:w-3/4 text-center md:text-left">
+                  <div className="text-sm text-gray-900">Soeur Anuncjata <br /> Divine Providence d'essiengbot</div>
+                  <div className="text-end text-primary/80 text-xs md:text-sm">Anuncjata@gmail.com</div>
+                </div>
+                <img src="/unknown.png" alt="coordination de la sante" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
+              <button disabled className="px-6 md:px-10 py-2 bg-red-700 text-primary-foreground rounded text-sm md:text-base">CENTRE DE SANTE</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-blue-700 text-primary-foreground rounded text-sm md:text-base">BUREAU</button>
+              <button disabled className="px-6 md:px-10 py-2"></button>
+            </div>
+          </div>
+        </section>
+
+        {/* Caritas */}
+        <section className="mb-30 max-w-3xl mx-auto text-xs md:text-sm text-gray-700 px-4 md:px-0" data-aos="fade-up" data-aos-delay="800">
+          <div className="p-4 rounded" data-aos="zoom-in" data-aos-delay="850">
+            <div className="text-4xl md:text-6xl text-destructive text-center">CARITAS</div>
+            <div className="h-40 bg-black mt-4 max-w-3xl"></div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full items-center bg-primary-foreground overflow-hidden rounded-md shadow-sm p-4 border gap-4" data-aos="fade-left" data-aos-delay="900">
+            <div className="p-2 w-full md:w-auto flex justify-center">
+              <Image
+                src="/logo caritas.png"
+                alt="Logo Caritas"
+                width={80}
+                height={80}
+                className="object-contain"
+              />
+            </div>
+            <p className="w-full md:w-3/4 rounded text-justify text-xs md:text-sm">
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+              La Caritas du Diocèse... (texte explicatif). Cette zone contient l'information institutionnelle et de contact.
+            </p>
+          </div>
+        </section>
+    </main>
+  )
+}
