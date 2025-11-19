@@ -29,7 +29,7 @@ export default function Home() {
           className={`relative min-h-screen bg-footer/10 container py-2 md:py-2 transition-all duration-1000 rounded-br-4xl mb-25 ${
             presentationVisible ? 'animate-fade-in-up' : 'opacity-0'
           }`}
-          data-aos="fade-up"
+          // data-aos="fade-up"
         >
           <header className="text-center mb-6" data-aos="fade-down" data-aos-delay="100">
             <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6">Diocèse</h1>
