@@ -25,8 +25,7 @@ export default function Header() {
         { label: 'LE DIOCÈSE', href: '/diocese' },
         { label: 'ZONES PASTORALES', href: '/zones-pastorales' },
         { label: 'OUVRIERS APOSTOLIQUES', href: '/ouvriers-apostoliques' },
-        { label: 'ACTIVITÉS', href: '/activites' },
-        { label: 'PASTORALES', href: '/pastorales' },
+        { label: 'ACTIVITÉS PASTORALES', href: '/activites-pastorales' },
         { label: 'CONTACTS', href: '/contacts' },
     ];
 

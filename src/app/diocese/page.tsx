@@ -84,30 +84,30 @@ export default function Home() {
               <div className="text-4xl md:text-6xl text-center w-full md:w-1/4 font-bold">SEDUC</div>
 
               <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
-                <div className="text-sm w-full md:w-3/4 text-gray-900 text-center md:text-left">Soeur -------- <br /> CONGREGATION</div>
+                <div className="text-sm w-full md:w-3/4 text-muted-foreground text-center md:text-left">Soeur -------- <br /> CONGREGATION</div>
                 <img src="/unknown.png" alt="SEDUC" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
               </div>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
-              <button disabled className="px-6 md:px-10 py-2 bg-red-700 text-primary-foreground rounded text-sm md:text-base">Écoles maternelles</button>
-              <button disabled className="px-6 md:px-10 py-2 bg-blue-700 text-primary-foreground rounded text-sm md:text-base">Écoles primaires</button>
-              <button disabled className="px-6 md:px-10 py-2 bg-green-700 text-primary-foreground rounded text-sm md:text-base">Collèges</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-destructive text-primary-foreground rounded text-sm md:text-base">Écoles maternelles</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-primary text-primary-foreground rounded text-sm md:text-base">Écoles primaires</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-secondary text-primary-foreground rounded text-sm md:text-base">Collèges</button>
             </div>
 
             <div className="bg-destructive/80 text-primary-foreground p-2 rounded-md flex flex-col md:flex-row items-center justify-between gap-4" data-aos="slide-left" data-aos-delay="750">
               <div className="text-2xl md:text-4xl text-center w-full md:w-1/4 font-bold">Coordination de la santé</div>
 
               <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
-                <div className="w-full md:w-3/4 text-center md:text-left">
-                  <div className="text-sm text-gray-900">Soeur Anuncjata <br /> Divine Providence d'essiengbot</div>
+                <div className="w-full md:w-3/4 text-muted-foreground text-center md:text-left">
+                  <div className="text-sm text-muted-foreground">Soeur Anuncjata <br /> Divine Providence d'essiengbot</div>
                   <div className="text-end text-primary/80 text-xs md:text-sm">Anuncjata@gmail.com</div>
                 </div>
                 <img src="/unknown.png" alt="coordination de la sante" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
               </div>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
-              <button disabled className="px-6 md:px-10 py-2 bg-red-700 text-primary-foreground rounded text-sm md:text-base">CENTRE DE SANTE</button>
-              <button disabled className="px-6 md:px-10 py-2 bg-blue-700 text-primary-foreground rounded text-sm md:text-base">BUREAU</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-destructive text-primary-foreground rounded text-sm md:text-base">CENTRE DE SANTE</button>
+              <button disabled className="px-6 md:px-10 py-2 bg-primary text-primary-foreground rounded text-sm md:text-base">BUREAU</button>
               <button disabled className="px-6 md:px-10 py-2"></button>
             </div>
           </div>
