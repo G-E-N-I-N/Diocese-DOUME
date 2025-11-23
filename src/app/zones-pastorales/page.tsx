@@ -18,14 +18,12 @@ export default function ZonePastoralePage() {
 
     const [isVisible, setIsVisible] = React.useState(false);
     const [zone, setZone] = React.useState("");
-    const [paroisse, setParoisse] = React.useState("");
 
     React.useEffect(() => {
         const fetchZoneAndParoisse = async () => {
             const result = await getZoneAndParoisse();
             if(result.success) {
                 setZone(result.zone);
-                // setParoisse(result.paroisse);
                 setIsVisible(result.success);
             }
         };
@@ -100,7 +98,6 @@ export default function ZonePastoralePage() {
             <ParoisseDialog
                 open={isVisible}
                 zone={zone}
-                paroisse={paroisse}
                 onClose={() => setIsVisible(false)}
             />
 

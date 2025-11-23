@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { ArrowRightCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { BertouaMap } from '@/components/BertouaMap';
 
 export default function Home() {
   const { ref: cathedralRef, isVisible: cathedralVisible } = useScrollAnimation();
@@ -44,35 +45,31 @@ export default function Home() {
             <p className="text-base md:text-lg leading-relaxed opacity-95 backdrop-blur-2xl p-5 rounded-4xl">
               Le diocèse de Doumé-Abong Mbang est un diocèse catholique situé dans la région de l'Est du Cameroun. 
               Il couvre le département de Haut-Nyong, avec une superficie de 16 379 km². 
-              Son territoire comprend deux principaux sièges : Doumé (cathédrale Saint-Pierre et Paul) 
-              et Abong Mbang (cathédrale Sacré-Cœur).
+              Son territoire comprend deux principaux sièges : Doumé (cathédrale Sacré-Cœur) 
+              et Abong Mbang (cathédrale Saint-Pierre et Paul).
             </p>
           </div>
-
-          {/* <div className={`${mutedBg} relative w-full overflow-hidden h-80 md:h-96 flex items-center justify-center shadow-lg`}>
-            <Image
-              src="/cathedral.jpg"
-              alt="Cathédrale"
-              fill
-              className="object-cover"
-            />
-          </div> */}
         </div>
       </section>
 
       {/* === Section 2 : Carte === */}
       <section
         ref={carteRef}
-        className={`relative w-auto h-[80vh] overflow-hidden transition-all duration-1000 ${
+        className={`relative w-auto h-[80vh] container overflow-hidden transition-all duration-1000 ${
           carteVisible ? 'animate-fade-in-up' : 'opacity-0'
         }`}
-      >
-        <Image
-          src="/carte.png"
-          alt="Cathédrale"
-          fill
-          className="object-contain"
+      > 
+        <BertouaMap
+          cities={[
+            { id: 'doume', name: 'DOUME', coordinates: [4.2328, 13.4637], url: '/zones-pastorales?zone=doume' },
+            { id: 'abong-mbang', name: 'Abong-Mbang', coordinates: [3.9828, 13.1740], url: '/zones-pastorales?zone=abong-mbang' },
+            { id: 'messamena', name: 'Messamena', coordinates: [3.7369491, 12.8298452], url: '/zones-pastorales?zone=messamena' },
+            { id: 'lomie', name: 'Lomié', coordinates: [3.155, 13.634], url: '/zones-pastorales?zone=lomie' },
+            { id: 'nguelemendouka', name: 'Nguélémendouka', coordinates: [4.3849, 12.9227], url: '/zones-pastorales?zone=nguelemendouka' },
+            { id: 'ngoyla', name: 'Ngoyla', coordinates: [2.6222, 14.0240], url: '/zones-pastorales?zone=ngoyla' },
+          ]}
         />
+
       </section>
 
       {/* === Section 3 : Annonces === */}
