@@ -3,7 +3,12 @@
 import Image from 'next/image';
 import { ArrowRightCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { BertouaMap } from '@/components/BertouaMap';
+
+import dynamic from "next/dynamic";
+
+const BertouaMap = dynamic(() => import('@/components/BertouaMap'), {
+  ssr: false,
+});
 
 export default function Home() {
   const { ref: cathedralRef, isVisible: cathedralVisible } = useScrollAnimation();
