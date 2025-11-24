@@ -40,7 +40,7 @@ export default function ZonePastoralePage() {
 
     // Zones pastorales
     const zones = [
-        { zone: "DOUME", doyen: "P. Mirek", image: "" },
+        { zone: "Doumé", doyen: "P. Mirek", image: "" },
         { zone: "Abong-Mbang", doyen: "L’Abbé Laurent", image: "/cath St Paul et Pierre Abng Mbang.png" },
         { zone: "Messamena", doyen: "P. Yves", image: "Messamena - Sanctuaire Misericorde Divine d'atok.png" },
         { zone: "Lomié", doyen: "Abbé Sylvain", image: "Lomie - Paroisse saint jean de mindourou.jpg" },

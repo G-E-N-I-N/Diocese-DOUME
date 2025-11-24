@@ -82,13 +82,14 @@ export default function Hero({ image, history }: HeroProps) {
                     p-4 md:p-7 
                     bg-primary-foreground 
                     text-xs md:text-sm
+                    text-justify
                 ">
-                    {history}{history}{history}{history}
+                    {history}
                 </p>
             </div>
 
             <div 
-                className="z-10 relative -bottom-20 flex flex-col items-center text-xs md:text-sm text-justify w-full"
+                className="z-10 relative -bottom-10 flex flex-col items-center text-xs md:text-sm text-justify w-full"
                 data-aos="fade-up"
             >
                 <svg 
@@ -129,11 +130,15 @@ export default function Hero({ image, history }: HeroProps) {
                         </h1>
 
                         <p className="text-xs md:text-sm opacity-90 mb-4 leading-relaxed">
-                            Né au Congo en ... (texte biographique de l'évêque). Extraits et détails.
-                            Né au Congo en ... (texte biographique de l'évêque). Extraits et détails.
-                            Né au Congo en ... (texte biographique de l'évêque). Extraits et détails.
-                            Né au Congo en ... (texte biographique de l'évêque). Extraits et détails.
-                            Né au Congo en ... (texte biographique de l'évêque). Extraits et détails.
+                            Mgr Jan Ozga est né le 17 Avril 1956 à Wola Raniżowska, dans le diocèse de Przemyśl en Pologne.
+                            Il a été ordonné prêtre le 7 Juin 1981.
+                            Après avoir travaillé dans la pastorale dans son diocèse, il est venu comme missionnaire au Cameroun en 1988.
+                            Il a travaillé comme vicaire et après comme curé de la paroisse de Nguélémendouka.
+                            Il était Vicaire Général du diocèse de Doumé Abong-Mbang.
+                            Le 24 janvier 1997 le pape Jean Paul II l’a nommé évêque de ce diocèse. 
+                            Il a reçu le sacre le 20 Avril 1997 des Mains du Card. Christian Tumi, alors archevêque de Douala.
+                            Le 29 juillet 2011 il est devenu Chevalier de l’Ordre de la Valeur du Cameroun. Sa devise épiscopale :
+                                « UT UNUM SINT  (« Qu’ils soient un »)
                         </p>
                     </div>
 

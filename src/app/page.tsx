@@ -66,12 +66,12 @@ export default function Home() {
       > 
         <BertouaMap
           cities={[
-            { id: 'doume', name: 'DOUME', coordinates: [4.2328, 13.4637], url: '/zones-pastorales?zone=doume' },
-            { id: 'abong-mbang', name: 'Abong-Mbang', coordinates: [3.9828, 13.1740], url: '/zones-pastorales?zone=abong-mbang' },
-            { id: 'messamena', name: 'Messamena', coordinates: [3.7369491, 12.8298452], url: '/zones-pastorales?zone=messamena' },
-            { id: 'lomie', name: 'Lomié', coordinates: [3.155, 13.634], url: '/zones-pastorales?zone=lomie' },
-            { id: 'nguelemendouka', name: 'Nguélémendouka', coordinates: [4.3849, 12.9227], url: '/zones-pastorales?zone=nguelemendouka' },
-            { id: 'ngoyla', name: 'Ngoyla', coordinates: [2.6222, 14.0240], url: '/zones-pastorales?zone=ngoyla' },
+            { id: 'Doumé', name: 'Doumé', coordinates: [4.2328, 13.4637], url: '/zones-pastorales?zone=Doumé' },
+            { id: 'Abong-Mbang', name: 'Abong-Mbang', coordinates: [3.9828, 13.1740], url: '/zones-pastorales?zone=Abong-Mbang' },
+            { id: 'Messamena', name: 'Messamena', coordinates: [3.7369491, 12.8298452], url: '/zones-pastorales?zone=Messamena' },
+            { id: 'Lomié', name: 'Lomié', coordinates: [3.155, 13.634], url: '/zones-pastorales?zone=Lomié' },
+            { id: 'Nguélémendouka', name: 'Nguélémendouka', coordinates: [4.3849, 12.9227], url: '/zones-pastorales?zone=Nguélémendouka' },
+            { id: 'Ngoyla', name: 'Ngoyla', coordinates: [2.6222, 14.0240], url: '/zones-pastorales?zone=Ngoyla' },
           ]}
         />
 

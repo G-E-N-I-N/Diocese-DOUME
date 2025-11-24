@@ -66,8 +66,8 @@ export default function BertouaMap({ cities }: BertouaMarkersProps) {
     return (
         <div className="w-full h-full shadow-lg">
             <MapContainer 
-                center={[4.555, 13.700]} 
-                zoom={10} 
+                center={[3.9828, 13.1740]} 
+                zoom={8} 
                 className="w-full h-full"
                 scrollWheelZoom={true}
             >

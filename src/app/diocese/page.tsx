@@ -9,7 +9,14 @@ import StaffCard from "./StaffCard";
 import Image from "next/image";
 
 export default function Home() {
-  const historyText = `La diocèse de Doumé Abong-Mbang faisait d'abord partie de la Préfecture Apostolique du Cameroun qui fut détachée du Vicariat Apostolique du Nyas au XIXe siècle. Le Vicariat devint diocèse en 1919. La création du Vicariat Apostolique du Yoko en 1961... (texte exemple).`;
+  const historyText = `
+                        L’actuel diocèse de Doumé Abong-Mbang faisait d’abord partie de la Préfecture Apostolique du Cameroun qui fut détachée du Vicariat Apostolique du Gabon, le 18 Mars 1890.
+                        Issu de la division du Vicariat apostolique de Yaoundé, Doumé devient Vicariat Apostolique le 3 Mars 1949.
+                        Il deviendra diocèse le 14 septembre 1955, et sera divisé le 23 Mars 1983, où il prendra le nom de Doumé Abong-Mbang.
+                        Sa superficie est de 36 375 km2, soit la superficie du département du Haut-Nyong.
+                        Le diocèse de Doumé Abong-Mbang fait ainsi partie depuis le 11 novembre 1994 de la Province Ecclésiastique de Bertoua qui comprend les diocèses de Bertoua, Batouri, Doumé Abong-Mbang et Yokadouma.
+                        Le diocèse compte en son sein 29 paroisses, et a une population estimée à 206.000 d’habitants.
+                      `;
   
   React.useEffect(() => {
     AOS.init({

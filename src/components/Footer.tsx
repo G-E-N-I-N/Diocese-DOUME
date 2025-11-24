@@ -35,6 +35,7 @@ export default function Footer() {
                             src="/Logo Noir et Blanc.png"
                             alt="Logo du Diocèse de Doumé Abong Mbang"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover"
                         />
                         <p className="text-sm text-muted-foreground z-10">DIOCÈSE DE DOUMÉ, Abong Mbang</p>

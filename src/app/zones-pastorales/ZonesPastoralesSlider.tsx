@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
+import { supabase } from "@/utils/supabase";
+
 export default function SectionAZonesTestimonial() {
     const primary = "var(--primary)";
     const cardBg = "var(--card)";
@@ -11,32 +13,43 @@ export default function SectionAZonesTestimonial() {
     const background = "var(--background)";
     const foreground = "var(--foreground)";
 
-    const zones = [
-        { zone: "DOUME", doyen: "P. Mirek", photo: "/cathedrale Doume.png" },
-        { zone: "Abong-Mbang", doyen: "L’Abbé Laurent", photo: "/cath St Paul et Pierre Abng Mbang.png" },
-        { zone: "Messamena", doyen: "P. Yves", photo: "/Messamena - Sanctuaire Misericorde Divine d'atok.png" },
-        { zone: "Lomié", doyen: "Abbé Sylvain", photo: "/Lomie - Paroisse saint jean de mindourou.jpg" },
-        { zone: "Nguélémendouka", doyen: "Abbé Jovanie", photo: "/Sanctuaire Notre Dame de l'assomption de Nguelemendouka.png" },
-        { zone: "Ngoyla", doyen: "Abbé Olivier", phote: "/cathedrale Doume.png" },
-    ];
-
+    const [zones, setZones] = useState<any[]>([]);
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
+        async function getZones() {
+            const { data: zonesData } = await supabase.from('zones').select();
+            if (zonesData && zonesData.length > 0) {
+                setZones(zonesData);
+            }
+        }
+        getZones();
+    }, []);
+
+    useEffect(() => {
+        if (zones.length === 0) return;
+
         const interval = setInterval(() => {
             setCurrent((prev) => (prev === zones.length - 1 ? 0 : prev + 1));
         }, 10000);
 
         return () => clearInterval(interval);
-    }, [zones.length]);
+    }, [zones]);
 
     const prevCard = () => {
+        if (zones.length === 0) return;
         setCurrent((prev) => (prev === 0 ? zones.length - 1 : prev - 1));
     };
 
     const nextCard = () => {
+        if (zones.length === 0) return;
         setCurrent((prev) => (prev === zones.length - 1 ? 0 : prev + 1));
     };
+
+    // Récupère la photo actuelle ou null si inexistante
+    const currentPhoto = zones[current]?.photo || null;
+    const currentZone = zones[current]?.zone || "";
+    const currentDoyen = zones[current]?.doyen || "";
 
     return (
         <section
@@ -51,30 +64,40 @@ export default function SectionAZonesTestimonial() {
             </h2>
 
             <div className="relative w-full max-w-5xl">
-                {/* Carte principale */}
                 <div
                     className="relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 flex items-center"
                     style={{ backgroundColor: cardBg, color: cardFg, height: "60vh" }}
                 >
-                    <Image
-                        src={zones[current].photo || "/cathedrale Doume.PNG"}
-                        alt={zones[current].doyen}
-                        fill
-                        className="object-cover"
-                    />
+                    {currentPhoto ? (
+                        // <Image
+                        //     src={currentPhoto}
+                        //     alt={currentDoyen}
+                        //     fill
+                        //     sizes="(max-width: 768px) 100vw, 50vw"
+                        //     className="object-cover"
+                        // />
+                        <img 
+                            src={currentPhoto}
+                            alt={currentDoyen}
+                            className="object-cover w-full h-full"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-center text-gray-400">
+                            Image non disponible
+                        </div>
+                    )}
 
                     <div className="absolute inset-0 flex justify-center items-center z-10 pointer-events-none">
                         <div className="backdrop-blur-xs bg-[rgba(0,0,0,0)] rounded-3xl p-6 w-2/3 flex flex-col items-center">
                             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-primary-foreground text-center">
-                                {zones[current].zone}
+                                {currentZone}
                             </h3>
                             <p className="text-center text-primary-foreground/90 text-xl md:text-2xl">
-                                Doyen: {zones[current].doyen}
+                                Doyen: {currentDoyen}
                             </p>
                         </div>
                     </div>
                 </div>
-
 
                 {/* Chevrons */}
                 <button
