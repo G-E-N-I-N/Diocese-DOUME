@@ -136,10 +136,10 @@ export default function Home() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[ 
-                { text: 'Pastorale des jeunes', color: accentColor },
-                { text: 'Formation chrétienne', color: 'bg-yellow-500 text-foreground hover:bg-yellow-600' },
-                { text: 'Éducation et santé', color: 'bg-green-600 text-white hover:bg-green-700' },
-                { text: 'Défis actuels', color: 'bg-primary text-primary-foreground hover:bg-primary/80' },
+                { text: 'Universelle', color: accentColor },
+                { text: 'Nationale', color: 'bg-yellow-500 text-foreground hover:bg-yellow-600' },
+                { text: 'Provenciale', color: 'bg-green-600 text-white hover:bg-green-700' },
+                { text: 'Diocésaines', color: 'bg-primary text-primary-foreground hover:bg-primary/80' },
               ].map((btn, i) => (
                 <button
                   key={i}

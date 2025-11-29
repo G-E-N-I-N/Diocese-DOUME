@@ -3,11 +3,16 @@
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 import ZonesPastoralesSlider from "./ZonesPastoralesSlider";
 import ParoisseDialog from "./ParoisseDialog";
 import { getZoneAndParoisse } from "@/hooks/zoneAndParoisseUrlHandler";
+import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
 export default function ZonePastoralePage() {
+    const supabase = createClient();
+    
     React.useEffect(() => {
         AOS.init({
             duration: 1200,
@@ -18,6 +23,7 @@ export default function ZonePastoralePage() {
 
     const [isVisible, setIsVisible] = React.useState(false);
     const [zone, setZone] = React.useState("");
+    const [zones, setZones] = React.useState<any[]>([]);
 
     React.useEffect(() => {
         const fetchZoneAndParoisse = async () => {
@@ -39,14 +45,15 @@ export default function ZonePastoralePage() {
     const foreground = "var(--foreground)";
 
     // Zones pastorales
-    const zones = [
-        { zone: "Doumé", doyen: "P. Mirek", image: "" },
-        { zone: "Abong-Mbang", doyen: "L’Abbé Laurent", image: "/cath St Paul et Pierre Abng Mbang.png" },
-        { zone: "Messamena", doyen: "P. Yves", image: "Messamena - Sanctuaire Misericorde Divine d'atok.png" },
-        { zone: "Lomié", doyen: "Abbé Sylvain", image: "Lomie - Paroisse saint jean de mindourou.jpg" },
-        { zone: "Nguélémendouka", doyen: "Abbé Jovanie", image: "Sanctuaire Notre Dame de l'assomption de Nguelemendouka.png" },
-        { zone: "Ngoyla", doyen: "Abbé Olivier" },
-    ];
+    React.useEffect(() => {
+        async function getZones() {
+            const { data: zonesData } = await supabase.from('zones').select();
+            if (zonesData && zonesData.length > 0) {
+                setZones(zonesData);
+            }
+        }
+        getZones();
+    }, []);
 
     // Programme pastoral
     const programme = [
@@ -98,7 +105,10 @@ export default function ZonePastoralePage() {
             <ParoisseDialog
                 open={isVisible}
                 zone={zone}
-                onClose={() => setIsVisible(false)}
+                onClose={() => {
+                    setIsVisible(false)
+                    redirect('/zones-pastorales');
+                }}
             />
 
             {/* Section C : Programme pastoral */}

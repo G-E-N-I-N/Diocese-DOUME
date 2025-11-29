@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-import { supabase } from "@/utils/supabase";
+import { createClient } from "@/utils/supabase/client";
 
 export default function SectionAZonesTestimonial() {
+    const supabase = createClient();
+    
     const primary = "var(--primary)";
     const cardBg = "var(--card)";
     const cardFg = "var(--card-foreground)";
@@ -31,7 +33,7 @@ export default function SectionAZonesTestimonial() {
 
         const interval = setInterval(() => {
             setCurrent((prev) => (prev === zones.length - 1 ? 0 : prev + 1));
-        }, 10000);
+        }, 90000);
 
         return () => clearInterval(interval);
     }, [zones]);
