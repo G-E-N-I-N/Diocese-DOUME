@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Plus, X, Edit2, Trash2, LogOut } from "lucide-react";
+import { Plus, X, Edit2, Trash2, LogOut, Loader2 } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
 
 export default function DashboardPage() {
@@ -17,35 +18,152 @@ export default function DashboardPage() {
     }, []);
 
     const [news, setNews] = useState<any[]>([]);
+    const [newsImages, setNewsImages] = useState<any[]>([]);
     const [showForm, setShowForm] = useState(false);
     const [showDialog, setShowDialog] = useState<any>(null);
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [message, setMessage] = useState("");
     const [images, setImages] = useState<File[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const dropRef = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // News
-    useEffect(() => {
-        async function getNews() {
-            const { data: newsData } = await supabase.from('news').select();
-            if (newsData && newsData.length > 0) {
-                setNews(newsData);
-            }
+    async function getNews() {
+        const { data: newsData } = await supabase.from('news').select();
+        if (newsData && newsData.length > 0) {
+            setNews(newsData);
         }
+    }
+    useEffect(() => {
         getNews();
-    }, []);
+    }, [setShowForm]);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
         window.location.href = "/";
     };
 
-    const handleSubmit = () => {
-        console.log({ title, description, images });
+    const handleSubmit = async () => {
+        setErrorMsg("");
+        setLoading(true);
+
+        if (!title || !description) {
+            setErrorMsg("Titre et description requis.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const supported = images.filter(img =>
+                ["jpg"].some(ext =>
+                    img.name.toLowerCase().endsWith(ext)
+                )
+            );
+
+            const uploadResults = await Promise.all(
+                supported.map(async img => {
+                    const resp = await uploadImage(img);
+                    return resp;
+                })
+            );
+
+            const uploadImg = uploadResults.filter(Boolean);
+
+            const { error } = await supabase
+                .from("news")
+                .insert({
+                    title: title,
+                    description: description,
+                    message: message,
+                    images: uploadImg
+                });
+
+            if (error) {
+                setErrorMsg(error.message);
+                setLoading(false);
+                return;
+            }
+
+            setTitle("");
+            setDescription("");
+            setMessage("");
+            setImages([]);
+            setShowForm(false);
+            redirect(window.location.href);
+            
+        } catch (err: any) {
+            setErrorMsg(err.message || "Erreur lors de l'enregistrement.");
+        } finally {
+            getNews();
+        }
+
+        setLoading(false);
     };
+
+    const handleDelete = async (item: any) => {
+        setLoading(true);
+        try {
+            const { error } = await supabase
+                .from("news")
+                .delete()
+                .eq("id", item.id);
+
+            if (error) {
+                console.error("Delete error:", error);
+                alert("Erreur lors de la suppression.");
+                return;
+            }
+
+            // if (item.images && Array.isArray(item.images)) {
+            //     for (const imgUrl of item.images) {
+            //         const path = imgUrl.split("/public/")[1];
+
+            //         await supabase.storage
+            //             .from("Diocese Doume")
+            //             .remove([path]);
+            //     }
+            // }
+
+            getNews();
+
+            console.log("News supprimée !");
+        } catch (e) {
+            console.error("Erreur:", e);
+        }finally {
+            setLoading(false);
+        }
+    };
+
+
+    async function uploadImage(image: File) {
+        const { data: dataE, error } = await supabase
+            .storage
+            .from('Diocese Doume')
+            .exists(`news/${image.name}`);
+        
+        if(!dataE) {
+            const { data, error } = await supabase
+                .storage
+                .from('Diocese Doume')
+                .upload(`news/${image.name}`, image, {
+                    cacheControl: '3600',
+                    upsert: false
+                });
+            if(error) setErrorMsg(error.message);
+        }
+
+        const { data } = supabase
+            .storage
+            .from('Diocese Doume')
+            .getPublicUrl(`news/${image.name}`);
+        if(data) return data.publicUrl;
+        else return null;
+    }
 
     const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -103,24 +221,26 @@ export default function DashboardPage() {
 
                             {/* Boutons Edit / Delete */}
                             <div className="absolute bottom-2 right-2 flex gap-2">
-                                <button
+                                {/* <button
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         console.log("Edit", item.id);
                                     }}
                                     className="p-1 rounded-full bg-transparent hover:bg-footer transition"
+                                    disabled={loading}
                                 >
                                     <Edit2 className="w-5 h-5 text-primary" />
-                                </button>
+                                </button> */}
 
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        console.log("Delete", item.id);
+                                        handleDelete(item);
                                     }}
                                     className="p-1 rounded-full bg-transparent hover:bg-footer transition"
+                                    disabled={loading}
                                 >
-                                    <Trash2 className="w-5 h-5 text-destructive" />
+                                    {loading ? <Loader2 className="w-5 h-5 text-destructive" /> : <Trash2 className="w-5 h-5 text-destructive" />}
                                 </button>
                             </div>
                         </div>
@@ -177,6 +297,7 @@ export default function DashboardPage() {
                         {/* Colonne droite : Titre et description */}
                         <div className="md:w-1/2 flex flex-col bg-background rounded-2xl p-4">
                             <h2 className="text-2xl font-bold mb-4 text-foreground">{showDialog.title}</h2>
+                            <p className="text-foreground/80 whitespace-pre-line mb-2 text-right font-semibold">{showDialog.message}</p>
                             <p className="text-foreground/80 whitespace-pre-line text-justify">{showDialog.description}</p>
                         </div>
 
@@ -187,7 +308,7 @@ export default function DashboardPage() {
 
             {/* Formulaire d'ajout */}
             {showForm && (
-                <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div className="fixed top-15 inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-transparent rounded-xl shadow-xl w-full max-w-5xl relative flex flex-col md:flex-row gap-6 p-6">
 
                         {/* Bouton fermer */}
@@ -211,6 +332,17 @@ export default function DashboardPage() {
                                     className="w-full mt-1 p-2 border rounded-lg bg-background"
                                     placeholder="Nom de la nouvelle"
                                     required
+                                />
+                            </div>
+
+                            <div>
+                                <label className="text-sm text-foreground">Message</label>
+                                <textarea
+                                    rows={2}
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    className="w-full mt-1 p-2 border rounded-lg bg-background"
+                                    placeholder="Message..."
                                 />
                             </div>
 
@@ -245,31 +377,58 @@ export default function DashboardPage() {
                                 />
                             </div>
 
+                            {/* Erreur */}
+                            {errorMsg && (
+                                <p className="text-destructive text-center text-sm">{errorMsg}</p>
+                            )}
+
                             <button
+                                type="submit"
                                 onClick={handleSubmit}
+                                disabled={loading}
                                 className="w-full bg-footer text-white p-3 rounded-lg shadow hover:bg-footer/90 transition mt-4"
                             >
-                                Enregistrer
+                                {loading && (
+                                    <Loader2 className="animate-spin h-5 w-5" />
+                                )}
+                                {loading ? "Enregistrement..." : "Enregistrer"}
                             </button>
                         </div>
 
                         {/* Colonne droite : Preview images */}
                         <div className="md:w-1/2 grid grid-cols-2 gap-2 pt-4 overflow-y-auto max-h-[70vh]">
                             {images.length > 0 ? (
-                                images.map((img, index) => (
-                                    <div key={index} className="relative">
-                                        <img
-                                            src={URL.createObjectURL(img)}
-                                            className="rounded-xl border shadow-sm w-full h-32 object-cover"
-                                        />
-                                        <button
-                                            onClick={() => setImages(images.filter((_, i) => i !== index))}
-                                            className="absolute top-2 right-2 bg-black/50 hover:text-destructive text-white p-1 rounded-full"
-                                        >
-                                            <X size={16} />
-                                        </button>
-                                    </div>
-                                ))
+                                images.map((img, index) => {
+                                    const isSupported = img.name.toLowerCase().endsWith(".jpg")
+
+                                    return (
+                                        <div key={index} className="relative">
+                                            {isSupported ? (
+                                                <>
+                                                    <img
+                                                        src={URL.createObjectURL(img)}
+                                                        className="rounded-xl border shadow-sm w-full h-32 object-cover"
+                                                    />
+
+                                                    <button
+                                                        onClick={() =>
+                                                            setImages(images.filter((_, i) => i !== index))
+                                                        }
+                                                        className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white p-1 rounded-full"
+                                                    >
+                                                        <X size={16} />
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <div className="flex items-center justify-center rounded-xl border shadow-sm w-full h-32 p-2 text-center">
+                                                    <p className="text-xs text-foreground/60">
+                                                        Format non supporté : <br /> {img.name}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })
                             ) : (
                                 <div className="flex items-center justify-center rounded-xl border shadow-sm w-full h-32">
                                     <p className="text-sm text-foreground/60">Aucune image ajoutée</p>

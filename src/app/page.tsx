@@ -1,8 +1,10 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ArrowRightCircle } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { createClient } from '@/utils/supabase/client';
 
 import dynamic from "next/dynamic";
 
@@ -11,6 +13,31 @@ const BertouaMap = dynamic(() => import('@/components/BertouaMap'), {
 });
 
 export default function Home() {
+  const supabase = createClient();
+
+  const [news, setNews] = useState<any[]>([]);
+  useEffect(() => {
+    async function getNews() {
+      const { data: newsData } = await supabase.from('news').select();
+      if (newsData && newsData.length > 0) {
+          setNews(newsData);
+      }
+    }
+
+    getNews();
+  }, []);
+
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    if (news.length === 0) return;
+  
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === news.length - 1 ? 0 : prev + 1));
+    }, 90000);
+  
+    return () => clearInterval(interval);
+  }, [news]);
+
   const { ref: cathedralRef, isVisible: cathedralVisible } = useScrollAnimation();
   const { ref: announcementRef, isVisible: announcementVisible } = useScrollAnimation();
   const { ref: pastoralRef, isVisible: pastoralVisible } = useScrollAnimation();
@@ -86,12 +113,12 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="relative rounded-xl overflow-hidden shadow-lg h-full">
-            <Image
-              src="/la jeunesse.png"
-              alt="Annonce fond"
-              fill
-              className="object-cover brightness-75"
-            />
+            <img
+                src={news[current]?.images[0]}
+                alt={`Annonce fond ${current}`}
+                // fill
+                className="w-full h-full object-cover brightness-75"
+              />
             <div className="absolute inset-0 bg-black/40" />
 
             <div className="relative z-10 p-6 md:p-8 text-white">
@@ -101,28 +128,27 @@ export default function Home() {
                 </div>
               </div>
               <p className="text-sm md:text-base leading-relaxed">
-                Le diocèse de Doumé-Abong Mbang dispose d’une Église catholique
-                qui procure une aide matérielle et spirituelle à la population. 
+                {news[current]?.description}
               </p>
             </div>
           </div>
 
           <div>
             <h2 className={`text-3xl md:text-4xl font-bold ${foregroundColor} mb-6 leading-tight`}>
-              La jeunesse au cœur<br />de l'Église...
+              {news[current]?.title}
             </h2>
 
             <div className="grid grid-cols-3 gap-4 mb-8">
-              {['/youth1.jpg', '/youth2.jpg', '/youth3.jpg'].map((src, i) => (
+              {news[current]?.images?.map((src: any, i: number) => (
                 <div
                   key={i}
                   className="relative rounded-lg h-32 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  <Image
+                  <img
                     src={src}
-                    alt={`Jeunesse ${i + 1}`}
-                    fill
-                    className="object-cover"
+                    alt={`${i + 1}`}
+                    // fill
+                    className="w-full h-full object-cover"
                   />
                 </div>
               ))}
@@ -130,7 +156,7 @@ export default function Home() {
 
             <div className={`${accentColor} p-6 rounded-lg mb-6 shadow-md`}>
               <p className="text-sm md:text-base leading-relaxed font-semibold">
-                La jeunesse occupe une place centrale dans la mission de l'Église.
+                {news[current]?.message}
               </p>
             </div>
 
