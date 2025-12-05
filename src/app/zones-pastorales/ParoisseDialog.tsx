@@ -59,7 +59,7 @@ const ParoisseDialog: React.FC<ParoisseDialogProps> = ({ open, zone, onClose }) 
 
         const interval = setInterval(() => {
             setCurrent(prev => (prev === currentParoisse.photo.length - 1 ? 0 : prev + 1));
-        }, 5000);
+        }, 30000);
 
         return () => clearInterval(interval);
     }, [currentParoisse?.photo]);
@@ -68,7 +68,7 @@ const ParoisseDialog: React.FC<ParoisseDialogProps> = ({ open, zone, onClose }) 
         <AnimatePresence>
             {open && (
                 <motion.div
-                    className="fixed top-30 inset-0 z-50 text-justify flex items-center justify-center bg-background/20 backdrop-blur-sm px-2"
+                    className="fixed top-15 inset-0 z-50 text-justify flex items-center justify-center bg-background/20 backdrop-blur-sm px-2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -137,7 +137,7 @@ const ParoisseDialog: React.FC<ParoisseDialogProps> = ({ open, zone, onClose }) 
                                     {/* Historique */}
                                     <div className="mt-4 px-4 py-3 border border-primary/60 rounded-xl shadow-md backdrop-blur-[1px]">
                                         <p className="mb-2 text-primary font-bold text-lg">Historique</p>
-                                        <p className="text-sm md:text-base">{currentParoisse?.historique}</p>
+                                        <div className="text-sm md:text-base">{currentParoisse?.historique}</div>
                                     </div>
 
                                     {/* Conseils */}
