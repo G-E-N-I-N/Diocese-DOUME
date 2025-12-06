@@ -3,12 +3,25 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { profiles, categories, subCategories } from "./data/profiles";
+import { ouvriersProfiles, categories, subCategories } from "./data/profiles";
 import { CardPerson } from "@/components/CardPerson";
 import { ProfilePreviewCard } from "@/components/ProfilePreviewCard";
 import { FilterBar } from "./FilterBar";
+import { a } from "framer-motion/client";
 
 export default function OuvrierApostolique() {
+  const [profiles, setProfiles] = useState<typeof ouvriersProfiles extends () => Promise<infer U> ? U : never>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    async function fetchProfiles() {
+      const data = await ouvriersProfiles();
+      setProfiles(data);
+      setIsLoading(false);
+    }
+    fetchProfiles();
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSub, setSelectedSub] = useState("");
   const [modalPerson, setModalPerson] = useState<typeof profiles[number] | null>(null);
@@ -39,14 +52,24 @@ export default function OuvrierApostolique() {
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filtered.map((person) => (
-          <ProfilePreviewCard
-            key={person.id}
-            person={person}
-            onClick={() => setModalPerson(person)}
-            data-aos="fade-up"
-          />
-        ))}
+        {isLoading ? (
+          Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="animate-pulse bg-gray-300 rounded-lg h-64" />
+          ))
+        ) : filtered.length === 0 ? (
+          <div className="col-span-full text-center py-12">
+          <p className="text-lg text-muted-foreground">Aucun profil trouvé</p>
+          </div>
+        ) : (
+          filtered.map((person) => (
+            <ProfilePreviewCard
+              key={person.id}
+              person={person}
+              onClick={() => setModalPerson(person)}
+              data-aos="fade-up"
+            />
+          ))
+        )}
       </div>
 
       {modalPerson && (

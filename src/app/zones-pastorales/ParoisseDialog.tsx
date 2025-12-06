@@ -137,7 +137,7 @@ const ParoisseDialog: React.FC<ParoisseDialogProps> = ({ open, zone, onClose }) 
                                     {/* Historique */}
                                     <div className="mt-4 px-4 py-3 border border-primary/60 rounded-xl shadow-md backdrop-blur-[1px]">
                                         <p className="mb-2 text-primary font-bold text-lg">Historique</p>
-                                        <div className="text-sm md:text-base">{currentParoisse?.historique}</div>
+                                        <div className="text-sm md:text-base" style={{ whiteSpace: "pre-wrap" }}>{currentParoisse?.historique}</div>
                                     </div>
 
                                     {/* Conseils */}
