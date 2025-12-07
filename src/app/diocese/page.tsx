@@ -27,6 +27,13 @@ export default function Home() {
   }, []);
 
   const { ref: presentationRef, isVisible: presentationVisible } = useScrollAnimation();
+  const [current, setCurrent] = React.useState(0);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === 3 ? 0 : prev + 1));
+    }, 25000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main className="container min-h-screen relative bg-background">
@@ -43,7 +50,7 @@ export default function Home() {
           </header>
 
           <Hero
-            image="/cathedrale sacré coeur.png"
+            image={`/diocese 0${current + 1}.png`}
             history={historyText}
           />
         </section>
@@ -58,20 +65,27 @@ export default function Home() {
               name="P. Josue SANKOUONDJOU"
               subtitle="Ordonné Prêtre le : 17 Mars 2018"
               email="sandjo50@yahoo.fr"
-              img="https://randomuser.me/api/portraits/men/32.jpg"
+              img="/chancelier.jpg"
             />
             <StaffCard
               role="Econome"
               name="P. Christel Mvogo Nomo"
               subtitle="Ordonné Prêtre le : 05 Décembre 2020"
               phone="+237 698 12 52 58"
-              img="https://randomuser.me/api/portraits/men/45.jpg"
+              img="/econome.jpg"
             />
             <StaffCard
               role="Secrétaire"
               name="S. Fabiana LEITGEBER"
-              subtitle="Consacrée le : ........"
-              email="sr.fabiana@doume.info"
+              subtitle="Consacrée le : 28 Juin 1981"
+              email="Fabianadoume@gmail.com"
+              img="/secretaire1.jpg"
+            />
+            <StaffCard
+              role="Secrétaire"
+              name="Diacre Loïc"
+              subtitle="Ordonné le : 16 Mai 2025"
+              img="/secretaire2.jpg"
             />
           </div>
         </section>
@@ -91,8 +105,8 @@ export default function Home() {
               <div className="text-4xl md:text-6xl text-center w-full md:w-1/4 font-bold">SEDUC</div>
 
               <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
-                <div className="text-sm w-full md:w-3/4 text-muted-foreground text-center md:text-left">Soeur -------- <br /> CONGREGATION</div>
-                <img src="/unknown.png" alt="SEDUC" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
+                <div className="text-sm w-full md:w-3/4 text-muted-foreground text-center md:text-left">Soeur Alice <br /> CONGREGATION</div>
+                <img src="/soeur Alice.jpg" alt="SEDUC" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded-full" />
               </div>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
@@ -106,10 +120,10 @@ export default function Home() {
 
               <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
                 <div className="w-full md:w-3/4 text-muted-foreground text-center md:text-left">
-                  <div className="text-sm text-muted-foreground">Soeur Anuncjata <br /> Divine Providence d'essiengbot</div>
+                  <div className="text-sm text-muted-foreground">Soeur Anuncjata WASZEWSKA <br /> Divine Providence d'essiengbot</div>
                   <div className="text-end text-primary/80 text-xs md:text-sm">Anuncjata@gmail.com</div>
                 </div>
-                <img src="/unknown.png" alt="coordination de la sante" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded" />
+                <img src="/soeur Anuncjata.jpg" alt="coordination de la sante" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded-full" />
               </div>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-between w-full">
@@ -117,16 +131,23 @@ export default function Home() {
               <button disabled className="px-6 md:px-10 py-2 bg-primary text-primary-foreground rounded text-sm md:text-base">BUREAU</button>
               <button disabled className="px-6 md:px-10 py-2"></button>
             </div>
+
+            <div className="bg-destructive/80 text-primary-foreground p-2 rounded-md flex flex-col md:flex-row items-center justify-between gap-4" data-aos="slide-left" data-aos-delay="750">
+              <div className="text-2xl md:text-4xl text-center w-full md:w-1/4 font-bold">CARITAS</div>
+
+              <div className="flex flex-col md:flex-row items-center rounded-md md:pl-8 h-auto md:h-32 bg-primary-foreground w-full md:w-3/4 gap-3">
+                <div className="w-full md:w-3/4 text-muted-foreground text-center md:text-left">
+                  <div className="text-sm text-muted-foreground">Soeur Fabiana LEITGEBER <br /> </div>
+                  <div className="text-end text-primary/80 text-xs md:text-sm">Fabianadoume@gmail.com</div>
+                </div>
+                <img src="/secretaire1.jpg" alt="coordination de la sante" className="object-cover w-24 md:w-32 h-24 md:h-32 rounded-full" />
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Caritas */}
-        <section className="mb-30 max-w-3xl mx-auto text-xs md:text-sm text-gray-700 px-4 md:px-0" data-aos="fade-up" data-aos-delay="800">
-          <div className="p-4 rounded" data-aos="zoom-in" data-aos-delay="850">
-            <div className="text-4xl md:text-6xl text-destructive text-center">CARITAS</div>
-            <div className="h-40 bg-black mt-4 max-w-3xl"></div>
-          </div>
-
+        <section className="mt-5 mb-30 max-w-3xl mx-auto text-xs md:text-sm text-gray-700 px-4 md:px-0" data-aos="fade-up" data-aos-delay="800">
           <div className="flex flex-col md:flex-row w-full items-center bg-primary-foreground overflow-hidden rounded-md shadow-sm p-4 border gap-4" data-aos="fade-left" data-aos-delay="900">
             <div className="p-2 w-full md:w-auto flex justify-center">
               <Image

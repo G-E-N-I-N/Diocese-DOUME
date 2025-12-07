@@ -21,6 +21,7 @@ export default function DashboardPage() {
     const [newsImages, setNewsImages] = useState<any[]>([]);
     const [showForm, setShowForm] = useState(false);
     const [showDialog, setShowDialog] = useState<any>(null);
+    const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({});
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -100,6 +101,7 @@ export default function DashboardPage() {
             setErrorMsg(err.message || "Erreur lors de l'enregistrement.");
         } finally {
             getNews();
+            setErrorMsg('');
         }
 
         setLoading(false);
@@ -147,14 +149,58 @@ export default function DashboardPage() {
             .exists(`news/${image.name}`);
         
         if(!dataE) {
-            const { data, error } = await supabase
-                .storage
-                .from('Diocese Doume')
-                .upload(`news/${image.name}`, image, {
-                    cacheControl: '3600',
-                    upsert: false
+            try {
+                // Demander à Supabase une URL signée pour upload
+                const { data, error } = await supabase.storage
+                    .from("Diocese Doume")
+                    .createSignedUploadUrl(`news/${image.name}`);
+
+                if (error) {
+                    setErrorMsg(error.message);
+                    return null;
+                }
+                const uploadUrl = data.signedUrl;
+
+                // Envoyer avec XMLHttpRequest pour suivre la progression
+                await new Promise<void>((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+
+                    xhr.open("PUT", uploadUrl);
+
+                    xhr.upload.onprogress = (event) => {
+                        if (event.lengthComputable) {
+                            const percent = Math.round((event.loaded / event.total) * 100);
+
+                            setUploadProgress(prev => ({
+                                ...prev,
+                                [image.name]: percent
+                            }));
+                        }
+                    };
+
+                    xhr.onload = () => {
+                        setUploadProgress(prev => ({
+                            ...prev,
+                            [image.name]: 100
+                        }));
+                        resolve();
+                    };
+
+                    xhr.onerror = () => reject(new Error("Erreur upload"));
+                    xhr.send(image);
                 });
-            if(error) setErrorMsg(error.message);
+            } catch(error: any) {
+                setErrorMsg(error.message);
+                return null;
+            }
+            // const { data, error } = await supabase
+            //     .storage
+            //     .from('Diocese Doume')
+            //     .upload(`news/${image.name}`, image, {
+            //         cacheControl: '3600',
+            //         upsert: false
+            //     });
+            // if(error) setErrorMsg(error.message);
         }
 
         const { data } = supabase
@@ -409,6 +455,15 @@ export default function DashboardPage() {
                                                         src={URL.createObjectURL(img)}
                                                         className="rounded-xl border shadow-sm w-full h-32 object-cover"
                                                     />
+
+                                                    {uploadProgress[img.name] !== undefined && (
+                                                        <div className="w-full bg-gray-300 rounded-full h-2 mt-2">
+                                                            <div
+                                                                className="bg-footer-600 h-2 rounded-full transition-all"
+                                                                style={{ width: `${uploadProgress[img.name]}%` }}
+                                                            />
+                                                        </div>
+                                                    )}
 
                                                     <button
                                                         onClick={() =>

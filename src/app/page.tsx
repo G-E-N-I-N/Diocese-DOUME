@@ -20,7 +20,7 @@ export default function Home() {
     async function getNews() {
       const { data: newsData } = await supabase.from('news').select();
       if (newsData && newsData.length > 0) {
-          setNews(newsData);
+          setNews(newsData.reverse());
       }
     }
 
@@ -28,15 +28,15 @@ export default function Home() {
   }, []);
 
   const [current, setCurrent] = useState(0);
-  useEffect(() => {
-    if (news.length === 0) return;
+  // useEffect(() => {
+  //   if (news.length === 0) return;
   
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev === news.length - 1 ? 0 : prev + 1));
-    }, 90000);
+  //   const interval = setInterval(() => {
+  //     setCurrent((prev) => (prev === news.length - 1 ? 0 : prev + 1));
+  //   }, 90000);
   
-    return () => clearInterval(interval);
-  }, [news]);
+  //   return () => clearInterval(interval);
+  // }, [news]);
 
   const { ref: cathedralRef, isVisible: cathedralVisible } = useScrollAnimation();
   const { ref: announcementRef, isVisible: announcementVisible } = useScrollAnimation();
@@ -112,26 +112,25 @@ export default function Home() {
         }`}
       >
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div className="relative rounded-xl overflow-hidden shadow-lg h-full">
+            <div className="relative rounded-xl overflow-hidden shadow-lg h-full flex flex-col">
             <img
-                src={news[current]?.images[0]}
-                alt={`Annonce fond ${current}`}
-                // fill
-                className="w-full h-full object-cover brightness-75"
-              />
+              src={news[current]?.images[0]}
+              alt={`Annonce fond ${current}`}
+              className="absolute inset-0 w-full h-full object-cover brightness-75"
+            />
             <div className="absolute inset-0 bg-black/40" />
 
-            <div className="relative z-10 p-6 md:p-8 text-white">
+            <div className="relative z-10 mt-auto p-6 md:p-8 text-white">
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-red-600 px-4 py-2 rounded font-bold text-sm">
-                  ANNONCES
-                </div>
+              <div className="bg-red-600 px-4 py-2 rounded font-bold text-sm">
+                ACTUALITE
+              </div>
               </div>
               <p className="text-sm md:text-base leading-relaxed">
-                {news[current]?.description}
+              {news[current]?.description}
               </p>
             </div>
-          </div>
+            </div>
 
           <div>
             <h2 className={`text-3xl md:text-4xl font-bold ${foregroundColor} mb-6 leading-tight`}>

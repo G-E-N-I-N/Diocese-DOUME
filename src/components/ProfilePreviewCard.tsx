@@ -30,7 +30,7 @@ export function ProfilePreviewCard({ person, onClick }: ProfilePreviewCardProps)
         >
             <div className="w-32 h-32 rounded-lg overflow-hidden mb-3">
                 <Image
-                    src={person.imageSrc}
+                    src={person.imageSrc || "/unknown.png"}
                     alt={person.name}
                     width={128}
                     height={128}

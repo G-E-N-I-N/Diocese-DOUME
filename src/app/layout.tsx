@@ -7,74 +7,123 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const oldEnglish = localFont({
-    src: "./fonts/OldEnglishFive.ttf",
-    variable: "--font-oldEnglish",
+  src: "./fonts/OldEnglishFive.ttf",
+  variable: "--font-oldEnglish",
+  preload: true, // optimisation SEO / perf
 });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: true,
 });
 
 export const metadata: Metadata = {
-  title: "Diocèse de Doumé Abong Mbang | Foi, Pastorale et Communauté au Cameroun",
-  
-  description: "Site officiel du Diocèse de Doumé Abong Mbang. Découvrez notre Évêque, les Zones Pastorales, les Ouvriers Apostoliques, et toutes les activités qui animent la vie de foi et le développement communautaire dans la région Est du Cameroun.",
-  
+  title:
+    "Diocèse de Doumé Abong Mbang | Foi, Pastorale et Communauté au Cameroun",
+  description:
+    "Site officiel du Diocèse de Doumé Abong Mbang. Retrouvez l'Évêque, les zones pastorales, les ouvriers apostoliques et les activités chrétiennes qui animent la vie de foi dans l’Est du Cameroun.",
+  metadataBase: new URL("https://diocese-doume.vercel.app/"),
+
   keywords: [
-    "diocèse", "Doumé Abong Mbang", "catholique", "église", "Cameroun", 
-    "pastorale", "jeunesse", "évêque", "foi", "zones pastorales", 
-    "ouvriers apostoliques", "activités chrétiennes", "haut-nyong", "l0rd_9h057"
+    "diocèse Doumé Abong Mbang",
+    "église catholique Cameroun",
+    "pastorale",
+    "évêque Doumé",
+    "zone pastorale Cameroun",
+    "ouvriers apostoliques",
+    "vie chrétienne Cameroun",
+    "paroisse est Cameroun",
+    "haut-nyong",
   ],
-  
+
   authors: [{ name: "l0rd_9h057" }],
-  
-  metadataBase: new URL('https://diocese-doume.vercel.app/'),
-  
-  openGraph: {
-    title: 'Diocèse de Doumé Abong Mbang - Site Officiel',
-    description: 'Découvrez la vie de foi, les zones pastorales et les activités de la communauté dans l’Est du Cameroun.',
-    url: '/',
-    siteName: 'Diocèse de Doumé Abong Mbang',
-    images: [
-        {
-            // Remplacer par l'URL d'une image représentative du Diocèse ou de la Cathédrale
-            url: 'https://placehold.co/1200x630/213b63/ffffff?text=Diocèse+Doumé+Abong+Mbang', 
-            width: 1200,
-            height: 630,
-            alt: 'Cathédrale Saint Paul et Pierre du Diocèse',
-        }
-    ],
-    locale: 'fr_FR',
-    type: 'website',
+
+  alternates: {
+    canonical: "/",
+    languages: {
+      "fr-FR": "/",
+    },
   },
 
-  // --- Configuration pour l'indexation ---
+  openGraph: {
+    title: "Diocèse de Doumé Abong Mbang - Site Officiel",
+    description:
+      "Découvrez la vie de foi, les zones pastorales et les activités chrétiennes du Diocèse de Doumé Abong Mbang.",
+    url: "/",
+    siteName: "Diocèse de Doumé Abong Mbang",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: "https://placehold.co/1200x630/213b63/ffffff?text=Diocèse+Doumé+Abong+Mbang",
+        width: 1200,
+        height: 630,
+        alt: "Cathédrale du Diocèse de Doumé Abong Mbang",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Diocèse de Doumé Abong Mbang",
+    description:
+      "Site officiel du Diocèse de Doumé Abong Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
+    images: [
+      "https://placehold.co/1200x630/213b63/ffffff?text=Diocèse+Doumé+Abong+Mbang",
+    ],
+  },
+
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
-
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={oldEnglish.variable}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Church",
+              name: "Diocèse de Doumé Abong Mbang",
+              url: "https://diocese-doume.vercel.app/",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Doumé",
+                addressRegion: "Est",
+                addressCountry: "CM",
+              },
+              description:
+                "Site officiel du Diocèse de Doumé Abong Mbang, Cameroun.",
+            }),
+          }}
+        />
+
         <ThemeProviders>
           <Header />
-          <main>{children}</main>
+          <main role="main">{children}</main>
           <Footer />
         </ThemeProviders>
       </body>

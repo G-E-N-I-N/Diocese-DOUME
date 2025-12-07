@@ -38,7 +38,7 @@ export default function Hero({ image, history }: HeroProps) {
             >
                 <Image
                     src={image}
-                    alt="Cathédrale"
+                    alt={image}
                     fill
                     className="object-cover"
                 />
