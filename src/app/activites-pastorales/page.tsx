@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 export default function ActivitesPastoralesPage() {
 
@@ -36,7 +37,7 @@ export default function ActivitesPastoralesPage() {
                 Synodes Diocésains
             </h2>
 
-            <section className="space-y-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <section className="space-y-5 grid grid-cols-1 md:grid-cols-2 mb-4 gap-4">
                 {[
                     {
                         title: "1er Synode (2000–2005)",
@@ -48,7 +49,8 @@ export default function ActivitesPastoralesPage() {
                             "Integer vitae lectus a est pulvinar scelerisque.",
                             "Mauris ac libero sit amet sapien feugiat.",
                             "Aenean fermentum velit at velit feugiat rhoncus."
-                        ]
+                        ],
+                        image: "/synode_1.png"
                     },
                     {
                         title: "2ème Synode (2013–2015)",
@@ -60,7 +62,8 @@ export default function ActivitesPastoralesPage() {
                             "Suspendisse in mi eget mi sagittis ultricies.",
                             "Phasellus dapibus enim nec est elementum porta.",
                             "Pellentesque sit amet tortor sagittis."
-                        ]
+                        ],
+                        image: "/synode_2.png"
                     },
                     {
                         title: "3ème Synode (2022–2025)",
@@ -72,7 +75,8 @@ export default function ActivitesPastoralesPage() {
                             "Donec aliquam justo nec dui dignissim ultricies.",
                             "Suspendisse potenti.",
                             "Cras mollis ex vel sem congue."
-                        ]
+                        ],
+                        image: "/synode_3.png"
                     }
                 ].map((synode, i) => (
                     <div
@@ -80,31 +84,44 @@ export default function ActivitesPastoralesPage() {
                         data-aos="fade-up"
                         className="border border-ring rounded-xl p-6 shadow-md bg-background"
                     >
-                        <h3 className="text-xl font-bold text-primary">{synode.title}</h3>
+                        {!synode.image ? (
+                            <div>
+                                <h3 className="text-xl font-bold text-primary">{synode.title}</h3>
 
-                        <p className="mt-3">
-                            <span className="font-semibold text-foreground">Thème : </span>
-                            {synode.theme}
-                        </p>
+                                <p className="mt-3">
+                                    <span className="font-semibold text-foreground">Thème : </span>
+                                    {synode.theme}
+                                </p>
 
-                        <p className="mt-3 text-foreground/80 leading-relaxed">
-                            {synode.resume}
-                        </p>
+                                <p className="mt-3 text-foreground/80 leading-relaxed">
+                                    {synode.resume}
+                                </p>
 
-                        <div className="mt-4">
-                            <h4 className="font-semibold text-foreground">Résolutions :</h4>
-                            <ul className="list-disc ml-6 mt-2 space-y-1 text-foreground/80">
-                                {synode.resolutions.map((r, idx) => (
-                                    <li key={idx}>{r}</li>
-                                ))}
-                            </ul>
-                        </div>
+                                <div className="mt-4">
+                                    <h4 className="font-semibold text-foreground">Résolutions :</h4>
+                                    <ul className="list-disc ml-6 mt-2 space-y-1 text-foreground/80">
+                                        {synode.resolutions.map((r, idx) => (
+                                            <li key={idx}>{r}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="min-h-200">
+                                <Image
+                                    src={synode.image}
+                                    alt={synode.image}
+                                    fill
+                                    className="object-cover w-full h-full rounded-xl"
+                                />
+                            </div>
+                        )}
                     </div>
                 ))}
             </section>
 
             {/* ---------------- PASTORALE POST SYNODALE ---------------- */}
-            <section className="space-y-4">
+            {/* <section className="space-y-4">
                 <h2
                     className="text-2xl font-semibold text-primary"
                     data-aos="fade-right"
@@ -122,10 +139,10 @@ export default function ActivitesPastoralesPage() {
                         eros at auctor malesuada, orci lorem luctus purus, eget malesuada nibh sem sit amet orci.
                     </p>
                 </div>
-            </section>
+            </section> */}
 
             {/* ---------------- MACs ET AUMÔNERIES ---------------- */}
-            <h2
+            {/* <h2
                 className="text-2xl font-semibold text-primary"
                 data-aos="fade-right"
             >
@@ -193,7 +210,7 @@ export default function ActivitesPastoralesPage() {
                         sed faucibus mauris tristique eget. Aenean non euismod lorem, et pellentesque massa.
                     </p>
                 </div>
-            </section>
+            </section> */}
 
         </div>
     );
