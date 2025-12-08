@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+import { createClient } from "@/utils/supabase/client";
 
 interface CardPersonProps {
   person: {
@@ -12,14 +14,34 @@ interface CardPersonProps {
     role: string;
     email: string;
     imageSrc: string;
+    paroisse: string;
+    telephone: string;
   } | null;
   onClose: () => void;
 }
 
 export function CardPerson({ person, onClose }: CardPersonProps) {
+  const supabase = createClient();
   useEffect(() => {
     AOS.init({ duration: 600, once: true });
   }, []);
+
+  const [paroisseName, setParoisseName] = useState("...");
+  useEffect(() => {
+    if (!person) return;
+
+    async function fetchParoisse() {
+      const { data, error } = await supabase
+        .from("paroisses")
+        .select("name")
+        .eq("id", person?.paroisse)
+        .single();
+
+      setParoisseName(error ? "..." : data?.name || "...");
+    }
+
+    fetchParoisse();
+  }, [person]);
 
   if (!person) return null;
 
@@ -45,7 +67,7 @@ export function CardPerson({ person, onClose }: CardPersonProps) {
         <div className="flex items-start gap-5">
           <div className="w-28 h-28 rounded-lg overflow-hidden shrink-0">
             <Image
-              src={person.imageSrc}
+              src={person.imageSrc || "/unknown.png"}
               alt={person.name}
               width={112}
               height={112}
@@ -59,7 +81,8 @@ export function CardPerson({ person, onClose }: CardPersonProps) {
             </h2>
 
             <p className="text-foreground/80 mb-1">{person.ordained}</p>
-            <p className="text-foreground/80 mb-4">{person.role}</p>
+            <p className="text-foreground/80 mb-1">{person.role}</p>
+            <p className="text-foreground/80 mb-4">{paroisseName}</p>
 
             <div className="text-right">
               <a
@@ -69,6 +92,7 @@ export function CardPerson({ person, onClose }: CardPersonProps) {
                 {person.email}
               </a>
             </div>
+            <p className="text-foreground/80 text-right mb-4">{person.telephone}</p>
           </div>
         </div>
       </div>

@@ -32,8 +32,8 @@ export default function OuvrierApostolique() {
   }, []);
 
   const filtered = profiles.filter((p) => {
-    const cat = selectedCategory ? p.type === selectedCategory : true;
-    const sub = selectedSub ? p.role === selectedSub : true;
+    const cat = selectedCategory ? p.role === selectedCategory : true;
+    const sub = selectedSub ? p.type === selectedSub : true;
     const match = p.name.toLowerCase().includes(search.toLowerCase());
     return cat && sub && match;
   });

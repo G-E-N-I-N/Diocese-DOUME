@@ -23,12 +23,12 @@ export function ProfilePreviewCard({ person, onClick }: ProfilePreviewCardProps)
 
     return (
         <div
-            className="cursor-pointer group flex flex-col items-center bg-card text-card-foreground rounded-xl p-4 shadow hover:shadow-lg transition"
+            className="cursor-pointer group flex flex-col items-center bg-card text-card-foreground rounded-xl p-4 shadow hover:shadow-primary transition"
             onClick={onClick}
             ref={profilrRef}
             data-aos="fade-up"
         >
-            <div className="w-32 h-32 rounded-lg overflow-hidden mb-3">
+            <div className="w-32 h-32 rounded-full overflow-hidden mb-3">
                 <Image
                     src={person.imageSrc || "/unknown.png"}
                     alt={person.name}

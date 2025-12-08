@@ -7,10 +7,11 @@ export const ouvriersProfiles = async () => {
   return zonesData || [];
 }
 
-export const categories = ["Prêtre", "Sœur/Frère", "Séminariste"];
+export const categories = ["Prêtre", "Sœur", "Frère", "Séminariste"];
 
 export const subCategories = {
-  "Prêtre": ["Diocésains", "Missionnaires", "FIDEI DONUM", "Religieux"],
-  "Sœur/Frère": ["Congrégation", "Lieu du travail", "Nombre"],
-  "Séminariste": ["Propédeutes", "Philosophes", "Théologiens"]
+  "Prêtre": ["Diocésains", "FIDEI DONUM"],
+  "Sœur": ["Congrégation"],
+  "Frère": ["Congrégation"],
+  "Séminariste": ["Propédeutes"]
 };
