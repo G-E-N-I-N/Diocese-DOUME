@@ -40,9 +40,9 @@ export default function Header() {
                         className="flex items-center gap-2 hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
                         <div className="text-center">
-                            <h1 className="text-xl md:text-xl font-oldEnglish text-footer transition-all duration-300">
+                            <span className="text-xl md:text-xl font-oldEnglish text-footer transition-all duration-300">
                                 Diocèse de Doumé Abong-Mbang
-                            </h1>
+                            </span>
                         </div>
                     </Link>
 

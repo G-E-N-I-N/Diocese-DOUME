@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 const oldEnglish = localFont({
   src: "./fonts/OldEnglishFive.ttf",
   variable: "--font-oldEnglish",
-  preload: true, // optimisation SEO / perf
+  preload: true,
 });
 
 const geistSans = Geist({
@@ -25,59 +25,65 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title:
-    "Diocèse de Doumé Abong Mbang | Foi, Pastorale et Communauté au Cameroun",
+  metadataBase: new URL("https://www.diocesededoumeabong-mbang.com"),
+
+  title: {
+    default:
+      "Diocèse de Doumé-Abong-Mbang | Église Catholique dans l’Est du Cameroun",
+    template: "%s | Diocèse de Doumé-Abong-Mbang",
+  },
+
   description:
-    "Site officiel du Diocèse de Doumé Abong Mbang. Retrouvez l'Évêque, les zones pastorales, les ouvriers apostoliques et les activités chrétiennes qui animent la vie de foi dans l’Est du Cameroun.",
-  metadataBase: new URL("https://diocese-doume.vercel.app/"),
+    "Site officiel du Diocèse de Doumé-Abong-Mbang au Cameroun. Informations sur l’Évêque, les zones pastorales, les ouvriers apostoliques et les activités de la vie chrétienne dans l’Est du Cameroun.",
 
   keywords: [
-    "diocèse Doumé Abong Mbang",
+    "diocèse de Doumé Abong-Mbang",
     "église catholique Cameroun",
-    "pastorale",
-    "évêque Doumé",
-    "zone pastorale Cameroun",
+    "diocèse catholique Est Cameroun",
+    "paroisses Haut-Nyong",
+    "zones pastorales Cameroun",
     "ouvriers apostoliques",
-    "vie chrétienne Cameroun",
-    "paroisse est Cameroun",
-    "haut-nyong",
   ],
 
-  authors: [{ name: "l0rd_9h057" }],
+  authors: [
+    {
+      name: "Diocèse de Doumé-Abong-Mbang",
+      url: "https://www.diocesededoumeabong-mbang.com",
+    },
+  ],
 
   alternates: {
     canonical: "/",
     languages: {
+      "fr-CM": "/",
       "fr-FR": "/",
     },
   },
 
   openGraph: {
-    title: "Diocèse de Doumé Abong Mbang - Site Officiel",
+    title: "Diocèse de Doumé-Abong-Mbang – Site Officiel",
     description:
-      "Découvrez la vie de foi, les zones pastorales et les activités chrétiennes du Diocèse de Doumé Abong Mbang.",
+      "Découvrez la mission, les activités pastorales et la vie chrétienne du Diocèse de Doumé-Abong-Mbang au Cameroun.",
     url: "/",
-    siteName: "Diocèse de Doumé Abong Mbang",
-    locale: "fr_FR",
+    siteName: "Diocèse de Doumé-Abong-Mbang",
+    locale: "fr_CM",
     type: "website",
     images: [
       {
-        url: "https://placehold.co/1200x630/213b63/ffffff?text=Diocèse+Doumé+Abong+Mbang",
+        url: "/logo couleur.png",
         width: 1200,
         height: 630,
-        alt: "Cathédrale du Diocèse de Doumé Abong Mbang",
+        alt: "Diocèse de Doumé-Abong-Mbang",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Diocèse de Doumé Abong Mbang",
+    title: "Diocèse de Doumé-Abong-Mbang",
     description:
-      "Site officiel du Diocèse de Doumé Abong Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
-    images: [
-      "https://placehold.co/1200x630/213b63/ffffff?text=Diocèse+Doumé+Abong+Mbang",
-    ],
+      "Site officiel du Diocèse de Doumé-Abong-Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
+    images: ["/logo couleur.png"],
   },
 
   robots: {
@@ -93,6 +99,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -107,8 +114,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Church",
-              name: "Diocèse de Doumé Abong Mbang",
-              url: "https://diocese-doume.vercel.app/",
+              name: "Diocèse de Doumé-Abong-Mbang",
+              url: "https://www.diocesededoumeabong-mbang.com",
+              logo: "/logo-couleur.png",
+              areaServed: {
+                "@type": "AdministrativeArea",
+                name: "Région de l’Est, Cameroun",
+              },
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Doumé",
@@ -116,10 +128,11 @@ export default function RootLayout({
                 addressCountry: "CM",
               },
               description:
-                "Site officiel du Diocèse de Doumé Abong Mbang, Cameroun.",
+                "Site officiel du Diocèse de Doumé-Abong-Mbang, Église catholique dans l’Est du Cameroun.",
             }),
           }}
         />
+
 
         <ThemeProviders>
           <Header />
