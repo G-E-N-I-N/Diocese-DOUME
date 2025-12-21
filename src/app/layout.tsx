@@ -29,12 +29,12 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Diocèse de Doumé-Abong-Mbang | Église Catholique dans l’Est du Cameroun",
-    template: "%s | Diocèse de Doumé-Abong-Mbang",
+      "Diocèse de Doumé Abong-Mbang | Église Catholique dans l’Est du Cameroun",
+    template: "%s | Diocèse de Doumé Abong-Mbang",
   },
 
   description:
-    "Site officiel du Diocèse de Doumé-Abong-Mbang au Cameroun. Informations sur l’Évêque, les zones pastorales, les ouvriers apostoliques et les activités de la vie chrétienne dans l’Est du Cameroun.",
+    "Site officiel du Diocèse de Doumé Abong-Mbang au Cameroun. Informations sur l’Évêque, les zones pastorales, les ouvriers apostoliques et les activités de la vie chrétienne dans l’Est du Cameroun.",
 
   keywords: [
     "diocèse de Doumé Abong-Mbang",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 
   authors: [
     {
-      name: "Diocèse de Doumé-Abong-Mbang",
+      name: "Diocèse de Doumé Abong-Mbang",
       url: "https://www.diocesededoumeabong-mbang.com",
     },
   ],
@@ -61,11 +61,11 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Diocèse de Doumé-Abong-Mbang – Site Officiel",
+    title: "Diocèse de Doumé Abong-Mbang – Site Officiel",
     description:
-      "Découvrez la mission, les activités pastorales et la vie chrétienne du Diocèse de Doumé-Abong-Mbang au Cameroun.",
+      "Découvrez la mission, les activités pastorales et la vie chrétienne du Diocèse de Doumé Abong-Mbang au Cameroun.",
     url: "/",
-    siteName: "Diocèse de Doumé-Abong-Mbang",
+    siteName: "Diocèse de Doumé Abong-Mbang",
     locale: "fr_CM",
     type: "website",
     images: [
@@ -73,16 +73,16 @@ export const metadata: Metadata = {
         url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
         width: 1200,
         height: 630,
-        alt: "Diocèse de Doumé-Abong-Mbang",
+        alt: "Diocèse de Doumé Abong-Mbang",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Diocèse de Doumé-Abong-Mbang",
+    title: "Diocèse de Doumé Abong-Mbang",
     description:
-      "Site officiel du Diocèse de Doumé-Abong-Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
+      "Site officiel du Diocèse de Doumé Abong-Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
     images: ["https://www.diocesededoumeabong-mbang.com/logo couleur.png"],
   },
 
@@ -115,7 +115,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Church",
               "@id": "https://www.diocesededoumeabong-mbang.com/#church",
-              name: "Diocèse de Doumé-Abong-Mbang",
+              name: "Diocèse de Doumé Abong-Mbang",
               url: "https://www.diocesededoumeabong-mbang.com",
               logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
               description:
@@ -145,7 +145,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "@id": "https://www.diocesededoumeabong-mbang.com/#organization",
-              name: "Diocèse de Doumé-Abong-Mbang",
+              name: "Diocèse de Doumé Abong-Mbang",
               url: "https://www.diocesededoumeabong-mbang.com",
               logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
               contactPoint: {
@@ -166,7 +166,7 @@ export default function RootLayout({
               "@type": "WebSite",
               "@id": "https://www.diocesededoumeabong-mbang.com/#website",
               url: "https://www.diocesededoumeabong-mbang.com",
-              name: "Diocèse de Doumé-Abong-Mbang",
+              name: "Diocèse de Doumé Abong-Mbang",
               inLanguage: "fr-CM",
               publisher: {
                 "@id": "https://www.diocesededoumeabong-mbang.com/#organization",
