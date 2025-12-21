@@ -165,6 +165,9 @@ export default function RootLayout({
                 areaServed: "CM",
                 availableLanguage: "French",
               },
+              sameAs: [
+                "https://www.diocesededoumeabong-mbang.com/#church"
+              ],
             }),
           }}
         />
