@@ -124,7 +124,7 @@ export default function RootLayout({
               url: "https://www.diocesededoumeabong-mbang.com",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+                url: "https://www.diocesededoumeabong-mbang.com/favicon.ico",
                 width: 512,
                 height: 512
               },
@@ -158,16 +158,19 @@ export default function RootLayout({
               "@id": "https://www.diocesededoumeabong-mbang.com/#organization",
               name: "Diocèse de Doumé Abong-Mbang",
               url: "https://www.diocesededoumeabong-mbang.com",
-              logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.diocesededoumeabong-mbang.com/favicon.ico",
+                width: 512,
+                height: 512
+              },
+              image: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Service pastoral",
                 areaServed: "CM",
                 availableLanguage: "French",
               },
-              sameAs: [
-                "https://www.diocesededoumeabong-mbang.com/#church"
-              ],
             }),
           }}
         />
