@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo couleur.png",
+        url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
         width: 1200,
         height: 630,
         alt: "Diocèse de Doumé-Abong-Mbang",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     title: "Diocèse de Doumé-Abong-Mbang",
     description:
       "Site officiel du Diocèse de Doumé-Abong-Mbang : foi, pastorale et vie communautaire dans l’Est du Cameroun.",
-    images: ["/logo couleur.png"],
+    images: ["https://www.diocesededoumeabong-mbang.com/logo couleur.png"],
   },
 
   robots: {
@@ -114,25 +114,66 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Church",
+              "@id": "https://www.diocesededoumeabong-mbang.com/#church",
               name: "Diocèse de Doumé-Abong-Mbang",
               url: "https://www.diocesededoumeabong-mbang.com",
-              logo: "/logo-couleur.png",
-              areaServed: {
-                "@type": "AdministrativeArea",
-                name: "Région de l’Est, Cameroun",
-              },
+              logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+              description:
+                "Diocèse de l’Église catholique situé dans la région de l’Est du Cameroun, couvrant le département du Haut-Nyong.",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Doumé",
                 addressRegion: "Est",
                 addressCountry: "CM",
               },
-              description:
-                "Site officiel du Diocèse de Doumé-Abong-Mbang, Église catholique dans l’Est du Cameroun.",
+              areaServed: {
+                "@type": "AdministrativeArea",
+                name: "Région de l’Est, Cameroun",
+              },
+              sameAs: [
+                "https://www.facebook.com/diocesededoume",
+                "https://www.youtube.com/@diocesededoume"
+              ],
             }),
           }}
         />
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://www.diocesededoumeabong-mbang.com/#organization",
+              name: "Diocèse de Doumé-Abong-Mbang",
+              url: "https://www.diocesededoumeabong-mbang.com",
+              logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "Service pastoral",
+                areaServed: "CM",
+                availableLanguage: "French",
+              },
+            }),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://www.diocesededoumeabong-mbang.com/#website",
+              url: "https://www.diocesededoumeabong-mbang.com",
+              name: "Diocèse de Doumé-Abong-Mbang",
+              inLanguage: "fr-CM",
+              publisher: {
+                "@id": "https://www.diocesededoumeabong-mbang.com/#organization",
+              },
+            }),
+          }}
+        />
 
         <ThemeProviders>
           <Header />
