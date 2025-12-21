@@ -60,6 +60,11 @@ export const metadata: Metadata = {
     },
   },
 
+  icons: {
+    icon: "/logo couleur.png",
+    apple: "/logo Noir et Blanc.png",
+  },
+
   openGraph: {
     title: "Diocèse de Doumé Abong-Mbang – Site Officiel",
     description:
@@ -71,8 +76,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
-        width: 1200,
-        height: 630,
+        width: 512,
+        height: 512,
         alt: "Diocèse de Doumé Abong-Mbang",
       },
     ],
@@ -117,7 +122,13 @@ export default function RootLayout({
               "@id": "https://www.diocesededoumeabong-mbang.com/#church",
               name: "Diocèse de Doumé Abong-Mbang",
               url: "https://www.diocesededoumeabong-mbang.com",
-              logo: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
+                width: 512,
+                height: 512
+              },
+              image: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
               description:
                 "Diocèse de l’Église catholique situé dans la région de l’Est du Cameroun, couvrant le département du Haut-Nyong.",
               address: {
