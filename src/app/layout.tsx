@@ -124,7 +124,7 @@ export default function RootLayout({
               url: "https://www.diocesededoumeabong-mbang.com",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.diocesededoumeabong-mbang.com/favicon.ico",
+                url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
                 width: 512,
                 height: 512
               },
@@ -160,7 +160,7 @@ export default function RootLayout({
               url: "https://www.diocesededoumeabong-mbang.com",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.diocesededoumeabong-mbang.com/favicon.ico",
+                url: "https://www.diocesededoumeabong-mbang.com/logo couleur.png",
                 width: 512,
                 height: 512
               },
