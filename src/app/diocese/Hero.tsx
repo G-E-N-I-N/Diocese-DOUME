@@ -125,9 +125,9 @@ export default function Hero({ image, history }: HeroProps) {
                     gap-6
                 ">
                     <div className="md:w-2/3 z-10 rounded-2xl md:rounded-none">
-                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-ornate mb-4 md:mb-8 p-2 leading-tight">
+                        <h2 className="text-3xl sm:text-5xl md:text-7xl font-ornate mb-4 md:mb-8 p-2 leading-tight">
                             Mgr. <br /> Jan Józef OZGA
-                        </h1>
+                        </h2>
 
                         <p className="text-xs md:text-sm opacity-90 mb-4 leading-relaxed">
                             Mgr Jan Ozga est né le 17 Avril 1956 à Wola Raniżowska, dans le diocèse de Przemyśl en Pologne.

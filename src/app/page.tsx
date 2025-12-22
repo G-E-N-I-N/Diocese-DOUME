@@ -68,9 +68,9 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-oldEnglish text-primary-foreground lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-oldEnglish text-primary-foreground lg:text-6xl font-bold mb-6 leading-tight">
               Cathédrale<br />Sacré Coeur.
-            </h2>
+            </h1>
             <div className={`${accentColor} px-4 py-2 inline-block rounded font-bold mb-6 text-sm`}>
               PRÉSENTATION
             </div>

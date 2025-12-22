@@ -51,6 +51,10 @@ export default function OuvrierApostolique() {
         setSearch={setSearch}
       />
 
+      <header className="text-center mb-6 hidden" data-aos="fade-down" data-aos-delay="100">
+        <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6">Diocèse</h1>
+      </header>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {isLoading ? (
           Array.from({ length: 12 }).map((_, i) => (

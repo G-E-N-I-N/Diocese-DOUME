@@ -57,7 +57,7 @@ export default function Home() {
 
         {/* Curie Diocésaine */}
         <section className="mt-5 mx-auto px-4 md:px-0" data-aos="fade-up" data-aos-delay="200">
-          <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="250">Curie Diocésaine</h1>
+          <span className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="250">Curie Diocésaine</span>
 
           <div className="bg-primary w-full space-y-3 px-4 md:px-30 py-4 rounded-lg" data-aos="fade-up" data-aos-delay="300">
             <StaffCard
@@ -98,7 +98,7 @@ export default function Home() {
 
         {/* Structures Diocésaines */}
         <section className="mt-5 mx-auto overflow-hidden px-4 md:px-0" data-aos="fade-up" data-aos-delay="550">
-          <h1 className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="600">Structures Diocésaines</h1>
+          <span className="text-2xl md:text-4xl font-oldEnglish text-footer/90 font-bold w-full text-center mb-6" data-aos="slide-down" data-aos-delay="600">Structures Diocésaines</span>
 
           <div className="space-y-4 container px-0" data-aos="fade-up" data-aos-delay="650">
             <div className="bg-destructive/80 text-primary-foreground p-2 rounded-md flex flex-col md:flex-row items-center justify-between gap-4" data-aos="slide-right" data-aos-delay="700">
