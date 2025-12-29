@@ -80,7 +80,8 @@ export default function Hero({ image, history }: HeroProps) {
                     w-[92%] md:w-auto
                     rounded-2xl 
                     p-4 md:p-7 
-                    bg-primary-foreground 
+                    bg-primary-foreground
+                    text-gray-900
                     text-xs md:text-sm
                     text-justify
                 ">
